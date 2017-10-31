@@ -35,9 +35,9 @@ class Billet extends Modele
     {
         $valeur = intval($limit);
         $sql = 'select BIL_ID as id, BIL_DATE as date,'
-            . ' BIL_TITRE as titre, LEFT (BIL_CONTENU,' . $valeur . ') as contenu from T_BILLET'
+            . ' BIL_TITRE as titre, LEFT (BIL_CONTENU, :valeur) as contenu from T_BILLET'
             . ' order by BIL_ID desc';
-        $billetsTronques = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        $billetsTronques = $this->executerRequete($sql, array('valeur' => $valeur), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
         return $billetsTronques;
     }
 
@@ -52,8 +52,8 @@ class Billet extends Modele
     {
         $sql = 'select BIL_ID as id, BIL_DATE as date,'
             . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
-            . ' where BIL_ID=?';
-        $billet = $this->executerRequete($sql, array($idBillet));
+            . ' where BIL_ID= :billetID';
+        $billet = $this->executerRequete($sql, array('billetID' => $idBillet));
         if ($billet->rowCount() > 0)
             return $billet->fetch();  // Accès à la première ligne de résultat
         else

@@ -1,1 +1,1 @@
-<p><?= $this->nettoyer($msgErreur) ?></p>
+<p style="text-align: center;"><?= $this->nettoyer($msgErreur) ?></p>

@@ -63,7 +63,7 @@ class Routeur {
             return $controleur;
         }
         catch (\Exception $e){
-            throw new \Exception("Fichier '$fichierControleur' introuvable");
+            throw new \Exception("Cette page n'existe pas !!!");
         }
     }
 

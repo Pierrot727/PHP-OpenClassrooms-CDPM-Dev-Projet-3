@@ -18,13 +18,15 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
             <th>Billet commençant par</th>
             <th>Commentaires</th>
             <th>Signalement</th>
+            <th>Action(s)</th>
         </tr>
 
         <?php foreach ($billets as $billet):
             ?>
             <tr>
 
-                <th><input id="checkbox"  name="<?= "check_list[" . $this->nettoyer($billet['id']) . "]" ?>" type="checkbox" ></th>
+                <th><input id="checkbox" name="<?= "check_list[]" ?>" value="<?= $this->nettoyer($billet['id']) ?>"
+                           type="checkbox"></th>
                 <th>
                     <a href="<?= "billet/index/" . $this->nettoyer($billet['id']) ?>"><?= $this->nettoyer($billet['titre']) ?></a>
                 </th>
@@ -34,20 +36,28 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
                 <th><?= $this->superNettoyer($billet['contenu']) ?></th>
                 <th>Oui (4)</th>
                 <th>-</th>
+                <th><a id="lienModifBillet" href="admin/modifierBillet"><img src="Contenu/images/symbol/modifier.png"
+                                                                             alt="modifier billet"
+                                                                             title="Cliquez pour modifier le billet selectionné"></a>
+                    <a id="lienSupprimerBillet" href="admin/supprimerBillet"><img
+                                src="Contenu/images/symbol/supprimer.png"
+                                alt="supprimer billet"
+                                title="Cliquez pour supprimer le/les billet(s) selectionné(s)"></a>
+                </th>
             </tr>
 
         <?php endforeach; ?>
 
 
     </table>
-    <a id="lienModifBillet" href="admin/modifierBillet"><img src="Contenu/images/symbol/modifier.png"
-                                                             alt="modifier billet"
-                                                             title="Cliquez pour modifier le billet selectionné"></a>
-    <a id="lienSupprimerBillet" href="admin/supprimerBillet"><img src="Contenu/images/symbol/supprimer.png"
-                                                                  alt="supprimer billet"
-                                                                  title="Cliquez pour supprimer le/les billet(s) selectionné(s)"></a>
+    <select>
+        <option value="">Choisissez une action</option>
+        <option value="supprimer">Supprimer</option>
+        <option value="archiver">Activer/suspendre publication</option>
+    </select>
 
-    <button type="submit">Valider le changement</button>
+    <button type="submit" name="action_valider">Valider</button>
+
 </form>
 
 <hr>

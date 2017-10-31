@@ -1,31 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <base href="<?= $racineWeb ?>" >
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <link rel="stylesheet" href="Contenu/css/style.css" />
-        <script src='Contenu/js/tinymce/tinymce.min.js'></script>
-        <script>
-            tinymce.init({
-                selector: '#tiny',
-                language: 'fr_FR'
-            });
-        </script>
-        <title><?= $titre ?></title>
-    </head>
-    <body>
-        <div id="global">
-            <header>
-                <a href=""><h1 id="titreBlog">Mon Blog</h1></a>
-                <p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
-            </header>
-            <div id="contenu">
-                <?= $contenu ?>
-            </div> <!-- #contenu -->
-            <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.  <?= $lien ?>
-            </footer>
-        </div> <!-- #global -->
-    </body>
+<head>
+    <meta charset="UTF-8"/>
+    <base href="<?= $racineWeb ?>">
+    <link rel="stylesheet" href="Contenu/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Contenu/css/style.css"/>
+    <script src="Contenu/js/jquery.js"></script>
+    <script src="Contenu/js/bootstrap.min.js"></script>
+    <script src='Contenu/js/tinymce/tinymce.min.js'></script>
+
+    <title><?= $titre ?></title>
+</head>
+
+
+<body class="corp">
+<header class="visiteur">
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-4"><img src='Contenu/images/logo.png' alt='logo'></div>
+        <div class="col-lg-8">
+            <nav class="menu">
+                <ul>
+                    <li><a href='Accueil'>Accueil</a></li>
+                    <li><a href='MesLivres'>Mes livres</a></li>
+                    <li><a href='QuiEstJF'>Qui est Jean Forteroche ?</a></li>
+                    <li><a href='Contact'>Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href=""><h1 id="titre-page">Billet simple pour l'Alaska</h1></a>
+        <h2 id="sous-titre-page">Un roman de Jean Forteroche.</h2>
+    </div>
+</header>
+
+<div id="contenu">
+    <?= $contenu ?>
+</div> <!-- #contenu -->
+
+<footer id="piedBlog">
+    <div class="container">
+        <div class="row link-zone">
+
+        </div>
+        <div class="copyright">
+            © 2017 Jean FORTEROCHE - Billet simple pour l'Alaska - <?= $lien ?>
+        </div>
+    </div>
+</footer>
+</div> <!-- #global -->
+
+</body>
 </html>

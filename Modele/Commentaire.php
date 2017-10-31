@@ -14,16 +14,16 @@ class Commentaire extends Modele {
     public function getCommentaires($idBillet) {
         $sql = 'select COM_ID as id, COM_DATE as date,'
                 . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
-                . ' where BIL_ID=?';
-        $commentaires = $this->executerRequete($sql, array($idBillet));
+                . ' where BIL_ID= :id';
+        $commentaires = $this->executerRequete($sql, array('id'=>$idBillet));
         return $commentaires;
     }
 
     public function countCommentairesperBillet($idBillet){
         $sql = 'select COM_ID as id, COM_DATE as date,'
             . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
-            . ' where BIL_ID=?';
-        $nombreCommentairesperBillet = $this->executerRequete($sql, array($idBillet))->fetch();
+            . ' where BIL_ID=:id';
+        $nombreCommentairesperBillet = $this->executerRequete($sql, array('id'=>$idBillet))->fetch();
         return $nombreCommentairesperBillet;
     }
 

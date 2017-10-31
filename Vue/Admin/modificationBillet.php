@@ -1,11 +1,11 @@
-<?php $this->titre = "Mon Blog - Ajouter un nouveau billet" ?>
+<?php $this->titre = "Mon Blog - Modifier un billet" ?>
     <h3>Création d'un nouveau billet</h3>
     <form method="post">
         <input name="dateBillet" placeholder="Entrez la date de ce billet"
                required>
         <input name="titreBillet" placeholder="Entrez votre le titre"
-               required>
-        <textarea id="tiny" name="contenuBillet" placeholder="Le texte"></textarea>
+               required value="<?= $billet['title'] ?>">
+        <textarea id="tiny" name="contenuBillet" placeholder="Le texte"><?= $billet['description'] ?></textarea>
         <button type="submit">Créer le nouveau billet</button>
     </form>
 

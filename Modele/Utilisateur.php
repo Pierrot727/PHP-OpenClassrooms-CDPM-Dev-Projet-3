@@ -20,8 +20,8 @@ class Utilisateur extends Modele
      */
     public function connecter($login, $mdp)
     {
-        $sql = "SELECT UTIL_ID , UTIL_MDP FROM T_UTILISATEUR WHERE UTIL_LOGIN=?";
-        $utilisateur = $this->executerRequete($sql, array($login));
+        $sql = "SELECT UTIL_ID , UTIL_MDP FROM T_UTILISATEUR WHERE UTIL_LOGIN= :utilLogin";
+        $utilisateur = $this->executerRequete($sql, array('utilLogin' => $login));
 
         if ($utilisateur->rowCount() == 1) {
             $utilisateur = $utilisateur->fetch();
@@ -49,8 +49,8 @@ class Utilisateur extends Modele
     function getUtilisateur($login)
     {
         $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp
-FROM T_UTILISATEUR WHERE UTIL_LOGIN=?";
-        $utilisateur = $this->executerRequete($sql, array($login));
+FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
+        $utilisateur = $this->executerRequete($sql, array('login' => $login));
         if ($utilisateur->rowCount() == 1)
             return $utilisateur->fetch(); // Accès à la première ligne de résultat
         else

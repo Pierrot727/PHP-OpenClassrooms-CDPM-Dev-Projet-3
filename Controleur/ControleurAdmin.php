@@ -97,7 +97,8 @@ class ControleurAdmin extends ControleurSecurise
             $this->billet->creationBillet($dateBillet, $titreBillet, $contenuBillet);
             $this->rediriger("admin");
         }
-        $this->genererVue();
+        $billet = array('title' => "Mon titre", 'description'=>'<p>Le contenu de mon article</p>');
+        $this->genererVue(array('billet'=>$billet));
     }
 
     public function compterChecbox () {

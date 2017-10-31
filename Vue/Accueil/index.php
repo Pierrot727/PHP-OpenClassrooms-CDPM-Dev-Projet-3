@@ -7,9 +7,10 @@
             <a href="<?= "billet/index/" . $this->nettoyer($billet['id']) ?>">
                 <h1 class="titreBillet"><?= $this->nettoyer($billet['titre']) ?></h1>
             </a>
-            <time><?= $this->nettoyer($billet['date']) ?></time>
+            <time>Publié le <?= $this->nettoyer($billet['date']) ?></time>
         </header>
-        <p><?= $this->nettoyer($billet['contenu']) ?></p>
+        <br>
+        <p><?= $this->supernettoyer($billet['contenu']) ?></p>
 
     </article>
     <hr />
