@@ -83,6 +83,17 @@ class Billet extends Modele
             ))->rowCount() == 1;
     }
 
+    public function modifierBillet($dateBillet, $titreBillet, $contenuBillet)
+    {
+        $sql = 'UPDATE INTO T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_CONTENU= :contenuBillet';
+        return $this->executerRequete($sql, array(
+                'dateBillet' => $dateBillet,
+                'titreBillet' => $titreBillet,
+                'contenuBillet' => $contenuBillet
+            ))->rowCount() == 1;
+    }
+
+
     public function supprimerBillet($idBillet)
     {
         $sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillet';

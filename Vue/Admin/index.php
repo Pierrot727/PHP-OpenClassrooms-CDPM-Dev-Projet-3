@@ -5,7 +5,7 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
 <?= $this->nettoyer($nbCommentaires) ?> commentaire(s) et <?= $this->nettoyer($nbSignalements) ?> signalements </br>
 <hr>
 <a id="lienNbillet" href="admin/creationBillet"><img src="Contenu/images/symbol/nouveau.png" alt="Nouveau billet"
-                                                     title="Nouveau billet"></a>
+                                                     title="Nouveau billet"> Créer un nouveau billet</a>
 <hr>
 <form action="admin/test" method="post">
 
@@ -34,15 +34,15 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
                     <time><?= $this->nettoyer($billet['date']) ?></time>
                 </th>
                 <th><?= $this->superNettoyer($billet['contenu']) ?></th>
-                <th>Oui (4)</th>
+                <th><?= $this->nettoyer($commentaires['gestionCommentaire']) ?></th>
                 <th>-</th>
-                <th><a id="lienModifBillet" href="admin/modifierBillet"><img src="Contenu/images/symbol/modifier.png"
+                <th><a id="lienModifBillet" name="modifier"><img src="Contenu/images/symbol/modifier.png"
                                                                              alt="modifier billet"
                                                                              title="Cliquez pour modifier le billet selectionné"></a>
-                    <a id="lienSupprimerBillet" href="admin/supprimerBillet"><img
+                    <a id="lienSupprimerBillet" name="supprimer"><img
                                 src="Contenu/images/symbol/supprimer.png"
                                 alt="supprimer billet"
-                                title="Cliquez pour supprimer le/les billet(s) selectionné(s)"></a>
+                                title="Cliquez pour supprimer le billet selectionné"></a>
                 </th>
             </tr>
 

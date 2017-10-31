@@ -126,4 +126,13 @@ class ControleurAdmin extends ControleurSecurise
         var_dump($idBillet);
     }
 
+    public function gestionCommentaire() {
+        $this->countCommentairesperBillet("idBillet");
+        if ($this->countCommentaireperBillet("idBillet") > 0) {
+
+            $gestionCommentaire = array ('gestionCommentaire' => 'echo "Oui (" + $this->countCommentairesperBillet("idBillet")');
+        }
+        $this->genererVue(array('gestionCommentaire'=>$gestionCommentaire));
+    }
+
 }
