@@ -20,7 +20,8 @@
         <div class="col-lg-4"><img src='Contenu/images/logo.png' alt='logo'></div>
         <div class="col-lg-8">
             <nav class="menu">
-                <ul>
+
+                <ul class="list-unstyled">
                     <li><a href='Accueil'>Accueil</a></li>
                     <li><a href='MesLivres'>Mes livres</a></li>
                     <li><a href='QuiEstJF'>Qui est Jean Forteroche ?</a></li>

@@ -34,10 +34,12 @@ class Billet extends Modele
     public function getBilletsTronques($page = 1, $limit = 50)
     {
         $valeur = intval($limit);
-        $sql = 'select BIL_ID as id, BIL_DATE as date,'
-            . ' BIL_TITRE as titre, LEFT (BIL_CONTENU, :valeur) as contenu from T_BILLET'
-            . ' order by BIL_ID desc';
-        $billetsTronques = $this->executerRequete($sql, array('valeur' => $valeur), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, COUNT(com.COM_ID) as cptCom'
+            .' from T_BILLET as billet'
+            . ' LEFT JOIN T_COMMENTAIRE com ON com.BIL_ID = billet.BIL_ID'
+            .' GROUP BY billet.BIL_ID'
+            . ' order by billet.BIL_ID desc';
+        $billetsTronques = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
         return $billetsTronques;
     }
 
@@ -83,13 +85,14 @@ class Billet extends Modele
             ))->rowCount() == 1;
     }
 
-    public function modifierBillet($dateBillet, $titreBillet, $contenuBillet)
+    public function modifierBillet($idBillet, $dateBillet, $titreBillet, $contenuBillet)
     {
-        $sql = 'UPDATE INTO T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_CONTENU= :contenuBillet';
+        $sql = 'UPDATE T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_CONTENU= :contenuBillet WHERE BIL_ID=:id';
         return $this->executerRequete($sql, array(
                 'dateBillet' => $dateBillet,
                 'titreBillet' => $titreBillet,
-                'contenuBillet' => $contenuBillet
+                'contenuBillet' => $contenuBillet,
+                'id' => $idBillet
             ))->rowCount() == 1;
     }
 

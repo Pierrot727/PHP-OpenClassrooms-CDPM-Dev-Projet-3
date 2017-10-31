@@ -25,7 +25,7 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
             ?>
             <tr>
 
-                <th><input id="checkbox" name="<?= "check_list[]" ?>" value="<?= $this->nettoyer($billet['id']) ?>"
+                <th><input id="checkbox" name="check_list[]" value="<?= $this->nettoyer($billet['id']) ?>"
                            type="checkbox"></th>
                 <th>
                     <a href="<?= "billet/index/" . $this->nettoyer($billet['id']) ?>"><?= $this->nettoyer($billet['titre']) ?></a>
@@ -33,13 +33,13 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
                 <th>
                     <time><?= $this->nettoyer($billet['date']) ?></time>
                 </th>
-                <th><?= $this->superNettoyer($billet['contenu']) ?></th>
-                <th><?= $this->nettoyer($commentaires['gestionCommentaire']) ?></th>
+                <th><?= mb_substr($this->superNettoyer($billet['contenu']),0,50 )?></th>
+                <th><?= $this->nettoyer($billet['cptCom']) ?></th>
                 <th>-</th>
-                <th><a id="lienModifBillet" name="modifier"><img src="Contenu/images/symbol/modifier.png"
+                <th><a id="lienModifBillet" href="admin/modifierBillet/<?= $billet['id'] ?>"><img src="Contenu/images/symbol/modifier.png"
                                                                              alt="modifier billet"
                                                                              title="Cliquez pour modifier le billet selectionné"></a>
-                    <a id="lienSupprimerBillet" name="supprimer"><img
+                    <a id="lienSupprimerBillet" href="admin/supprimerBillet/<?= $billet['id'] ?>"><img
                                 src="Contenu/images/symbol/supprimer.png"
                                 alt="supprimer billet"
                                 title="Cliquez pour supprimer le billet selectionné"></a>
@@ -50,7 +50,7 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
 
 
     </table>
-    <select>
+    <select name="form_action">
         <option value="">Choisissez une action</option>
         <option value="supprimer">Supprimer</option>
         <option value="archiver">Activer/suspendre publication</option>

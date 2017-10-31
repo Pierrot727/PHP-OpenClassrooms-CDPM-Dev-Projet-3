@@ -19,12 +19,18 @@ class Commentaire extends Modele {
         return $commentaires;
     }
 
-    public function countCommentairesperBillet($idBillet){
-        $sql = 'select COM_ID as id, COM_DATE as date,'
-            . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
+    public function countCommentairesPerBillet($idBillet){
+        $sql = 'SELECT COUNT(COM_ID) AS cpt'
+            . 'from T_COMMENTAIRE'
             . ' where BIL_ID=:id';
         $nombreCommentairesperBillet = $this->executerRequete($sql, array('id'=>$idBillet))->fetch();
-        return $nombreCommentairesperBillet;
+        return $nombreCommentairesperBillet['cpt'];
+    }
+
+    public function countCommentaires(){
+        $sql = 'SELECT COUNT(COM_ID) AS cpt FROM T_COMMENTAIRE';
+        $nombreCommentairesperBillet = $this->executerRequete($sql)->fetch();
+        return $nombreCommentairesperBillet['cpt'];
     }
 
     public function getCommentaire($idCommentaire) {
@@ -46,18 +52,6 @@ class Commentaire extends Modele {
     public function ajouterUnSignalement($id) {
         $sql = 'update T_COMMENTAIRE SET COM_SIGNALEMENT = COM_SIGNALEMENT + 1 WHERE COM_ID = ?';
         $this->executerRequete($sql, array($id));
-    }
-    /**
-     * Renvoie le nombre total de commentaires
-     *
-     * @return int Le nombre de commentaires
-     */
-    public function getNombreCommentaires()
-    {
-        $sql = 'select count(*) as nbCommentaires from T_COMMENTAIRE';
-        $resultat = $this->executerRequete($sql);
-        $ligne = $resultat->fetch(); // Le résultat comporte toujours 1 ligne
-        return $ligne['nbCommentaires'];
     }
 
     //Ajout Pierre

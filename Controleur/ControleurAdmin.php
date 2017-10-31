@@ -31,13 +31,12 @@ class ControleurAdmin extends ControleurSecurise
 
     public function index()
     {
+
         $nbBillets = $this->billet->getNombreBillets();
-        $nbCommentaires = $this->commentaire->getNombreCommentaires();
+        $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();
-        //Ajout
         $billets = $this->billet->getBilletsTronques();
 
-        //Fin de l'ajout
         $login = $this->requete->getSession()->getAttribut("login");
         $this->genererVue(array('nbBillets' => $nbBillets,
             'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
@@ -97,20 +96,45 @@ class ControleurAdmin extends ControleurSecurise
             $this->billet->creationBillet($dateBillet, $titreBillet, $contenuBillet);
             $this->rediriger("admin");
         }
-        $billet = array('title' => "Mon titre", 'description'=>'<p>Le contenu de mon article</p>');
-        $this->genererVue(array('billet'=>$billet));
+        $billet = array('title' => "Mon titre", 'description' => '<p>Le contenu de mon article</p>');
+        $this->genererVue(array('billet' => $billet));
     }
 
-    public function compterChecbox () {
-        if(!empty($_POST['check_list'])) {
-            foreach($_POST['check_list'] as $check) {
-                echo $check; //echoes the value set in the HTML form for each checked checkbox.
-                //so, if I were to check 1, 3, and 5 it would echo value 1, value 3, value 5.
-                //in your case, it would echo whatever $row['Report ID'] is equivalent to.
-            }
+    public function test()
+    {
+        var_dump($_POST);
+        $ids = $this->requete->getParametre('check_list');
+
+        switch ($this->requete->getParametre('form_action')) {
+            case 'supprimer':
+                $this->billet->supprimerBillets($ids);
+                break;
+            case "archiver":
+                $this->billet->archiverBillets($ids);
+                break;
+            default:
+                //
         }
+
     }
 
+    /**
+     * $_GET['id'] : id du billet à modifier
+     */
+    public function modifierBillet()
+    {
+        $id = $this->requete->getParametre('id');
+        if ($this->requete->existeParametre("dateBillet") && $this->requete->existeParametre("titreBillet") && $this->requete->existeParametre("contenuBillet")) {
+            $dateBillet = $this->requete->getParametre('dateBillet');
+            $titreBillet = $this->requete->getParametre('titreBillet');
+            $contenuBillet = $this->requete->getParametre('contenuBillet');
+            $this->billet->modifierBillet($id,$dateBillet, $titreBillet, $contenuBillet);
+            $this->rediriger("admin");
+        }
+
+        $billet = $this->billet->getBillet($id);
+        $this->genererVue(array('billet' => $billet));
+    }
 
     public function supprimerBillet()
     {
@@ -121,18 +145,10 @@ class ControleurAdmin extends ControleurSecurise
             $this->rediriger("admin");
         }
 
-            $param['msgErreur'] = 'ca marche pas';
+        $param['msgErreur'] = 'ca marche pas';
         var_dump($param);
         var_dump($idBillet);
     }
 
-    public function gestionCommentaire() {
-        $this->countCommentairesperBillet("idBillet");
-        if ($this->countCommentaireperBillet("idBillet") > 0) {
-
-            $gestionCommentaire = array ('gestionCommentaire' => 'echo "Oui (" + $this->countCommentairesperBillet("idBillet")');
-        }
-        $this->genererVue(array('gestionCommentaire'=>$gestionCommentaire));
-    }
 
 }

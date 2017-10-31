@@ -28,8 +28,7 @@ corp {
     width: 80%;
 }
 
-nav.menu {
-    list-style: none;
+nav.menu ul {
     display: flex;
     flex-direction: row;
 }
@@ -69,6 +68,8 @@ table
 td /* Toutes les cellules des tableaux... */
 {
     border: 1px solid black; /* auront une bordure de 1px */
+
+
 }
 
 
