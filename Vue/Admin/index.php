@@ -7,6 +7,10 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
 <a id="lienNbillet" href="admin/creationBillet"><img src="Contenu/images/symbol/nouveau.png" alt="Nouveau billet"
                                                      title="Nouveau billet"> Créer un nouveau billet</a>
 <hr>
+<hr>
+<a id="lienNbillet" href="admin/creationBillet"><img src="Contenu/images/symbol/moderation.png" alt="Panneau de modération"
+                                                     title="Panneau de modération"> Panneau de modérationt</a>
+<hr>
 <form action="admin/test" method="post">
 
 
@@ -35,7 +39,7 @@ Ce blog comporte <?= $this->nettoyer($nbBillets) ?> billet(s) et
                 </th>
                 <th><?= mb_substr($this->superNettoyer($billet['contenu']),0,50 )?></th>
                 <th><?= $this->nettoyer($billet['cptCom']) ?></th>
-                <th>-</th>
+                <th><?= $this->nettoyer($billet['cptSig']) ?></th>
                 <th><a id="lienModifBillet" href="admin/modifierBillet/<?= $billet['id'] ?>"><img src="Contenu/images/symbol/modifier.png"
                                                                              alt="modifier billet"
                                                                              title="Cliquez pour modifier le billet selectionné"></a>

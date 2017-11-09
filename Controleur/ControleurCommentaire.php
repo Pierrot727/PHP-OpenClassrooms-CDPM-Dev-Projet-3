@@ -34,8 +34,6 @@ class ControleurCommentaire extends Controleur {
 
         $this->rediriger("billet","index/" . $com['bil_id']);
 
-        //
-        //  header("Location: /coursPhp/chapitre3_mvc/tp_MonBlog/MonBlog-final/billet/index/$com[bil_id]");
     }
 }
 

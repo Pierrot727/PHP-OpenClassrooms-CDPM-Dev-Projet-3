@@ -34,15 +34,14 @@ class Billet extends Modele
     public function getBilletsTronques($page = 1, $limit = 50)
     {
         $valeur = intval($limit);
-        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, COUNT(com.COM_ID) as cptCom'
-            .' from T_BILLET as billet'
+        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, COUNT(com.COM_ID) as cptCom, SUM(com.COM_SIGNALEMENT) as cptSig'
+            . ' from T_BILLET as billet'
             . ' LEFT JOIN T_COMMENTAIRE com ON com.BIL_ID = billet.BIL_ID'
-            .' GROUP BY billet.BIL_ID'
+            . ' GROUP BY billet.BIL_ID'
             . ' order by billet.BIL_ID desc';
         $billetsTronques = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
         return $billetsTronques;
     }
-
 
     /** Renvoie les informations sur un billet
      *

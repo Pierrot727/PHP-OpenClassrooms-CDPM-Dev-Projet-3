@@ -128,7 +128,7 @@ class ControleurAdmin extends ControleurSecurise
             $dateBillet = $this->requete->getParametre('dateBillet');
             $titreBillet = $this->requete->getParametre('titreBillet');
             $contenuBillet = $this->requete->getParametre('contenuBillet');
-            $this->billet->modifierBillet($id,$dateBillet, $titreBillet, $contenuBillet);
+            $this->billet->modifierBillet($id, $dateBillet, $titreBillet, $contenuBillet);
             $this->rediriger("admin");
         }
 
@@ -138,16 +138,9 @@ class ControleurAdmin extends ControleurSecurise
 
     public function supprimerBillet()
     {
-        $this->compterChecbox();
-        if ($this->requete->existeParametre("idBillet")) {
-            $idBillet = $this->requete->getParametre("idBillet");
-            $this->billet->supprimerBillet($idBillet);
-            $this->rediriger("admin");
-        }
-
-        $param['msgErreur'] = 'ca marche pas';
-        var_dump($param);
-        var_dump($idBillet);
+        $id = $this->requete->getParametre('id');
+        $this->billet->supprimerBillet($id);
+        $this->rediriger("admin");
     }
 
 
