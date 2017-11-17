@@ -68,7 +68,12 @@ abstract class Controleur {
         
         // Instanciation et génération de la vueF
         $vue = new Vue($this->action, $controleur);
-        $vue->generer($donneesVue);
+        $vue->generer(array_merge($donneesVue,['flash'=> $this->requete->getSession()->getMessageFlash()]));
+    }
+
+
+    protected function setFlash($type,$message){
+        $this->requete->getSession()->setMessageFlash($type,$message);
     }
 
     protected function genererVueAdmin($donneesVue = array(), $action = null)
@@ -83,7 +88,7 @@ abstract class Controleur {
 
         // Instanciation et génération de la vueF
         $vue = new Vue($this->action, $controleur);
-        $vue->genererAdmin($donneesVue);
+        $vue->genererAdmin(array_merge($donneesVue,['flash'=> $this->requete->getSession()->getMessageFlash()]));
     }
 
     /**

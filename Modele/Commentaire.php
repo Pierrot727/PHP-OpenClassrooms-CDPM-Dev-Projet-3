@@ -19,15 +19,17 @@ class Commentaire extends Modele {
         return $commentaires;
     }
 
-    public function getCommentairesTronques($page = 1, $limit = 50)
+
+//    public function getCommentairesTronques() {
+//        $sql = 'select COM_ID as id, COM_DATE as date, COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE, T_BILLET WHERE t_billet.BIL_ID = t_commentaire.BIL_ID';
+//        $commentaires = $this->executerRequete($sql);
+//        return $commentaires;
+//    }
+
+    public function getCommentairesTronques()
     {
-        $valeur = intval($limit);
-        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, COUNT(com.COM_ID) as cptCom, SUM(com.COM_SIGNALEMENT) as cptSig'
-            . ' from T_BILLET as billet'
-            . ' LEFT JOIN T_COMMENTAIRE com ON com.BIL_ID = billet.BIL_ID'
-            . ' GROUP BY billet.BIL_ID'
-            . ' order by billet.BIL_ID desc';
-        $billetsTronques = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        $sql = 'SELECT t_billet.BIL_ID, t_commentaire.COM_CONTENU FROM t_commentaire, t_billet WHERE t_billet.BIL_ID = t_commentaire.BIL_ID';
+        $CommentairesTronques = $this->executerRequete($sql,  array('id'=>$idCommentaire))->fetch();
         return $CommentairesTronques;
     }
 
@@ -39,6 +41,7 @@ class Commentaire extends Modele {
         $commentaire = $this->executerRequete($sql, array('id'=>$idCommentaire))->fetch();
         return $commentaire;
     }
+
     public function countCommentairesPerBillet($idBillet){
         $sql = 'SELECT COUNT(COM_ID) AS cpt'
             . 'from T_COMMENTAIRE'

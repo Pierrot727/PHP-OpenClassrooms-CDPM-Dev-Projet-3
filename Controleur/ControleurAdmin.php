@@ -2,6 +2,7 @@
 
 namespace Blog\Controleur;
 
+use Blog\Framework\Session;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
 use Blog\Modele\Utilisateur;
@@ -101,7 +102,7 @@ class ControleurAdmin extends ControleurSecurise
 
     public function general()
     {
-  //      var_dump($_POST);
+        //      var_dump($_POST);
         $ids = $this->requete->getParametre('check_list');
 
         switch ($this->requete->getParametre('form_action')) {
@@ -139,19 +140,21 @@ class ControleurAdmin extends ControleurSecurise
     {
         $id = $this->requete->getParametre('id');
         $this->billet->supprimerBillet($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS,"Billet supprimé");
         $this->rediriger("admin/administration");
     }
 
-    public function moderation() {
+    public function moderation()
+    {
         $nbBillets = $this->billet->getNombreBillets();
         $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();
         $billets = $this->billet->getBilletsTronques();
- //       $commentaire = $this->commentaire->getCommentaire($id);
+        $commentaires = $this->commentaire->getCommentairesTronques();
 
         $login = $this->requete->getSession()->getAttribut("login");
         $this->genererVueAdmin(array('nbBillets' => $nbBillets,
-            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
+            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login, 'commentaires' => $commentaires));
 
     }
 

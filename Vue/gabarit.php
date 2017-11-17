@@ -34,7 +34,10 @@
     </div>
 </header>
 
+
 <div id="contenu">
+
+    <?php var_dump($flash); ?>
     <?= $contenu ?>
 </div> <!-- #contenu -->
 

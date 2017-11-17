@@ -42,8 +42,10 @@
 </nav>
 
 <div class="container-fluid">
+    <?php var_dump($flash); ?>
     <div id="contenu">
         <div class="row">
+
 
             <?= $contenu ?>
         </div> <!-- #contenu -->

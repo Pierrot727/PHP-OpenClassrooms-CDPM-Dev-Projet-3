@@ -134,13 +134,12 @@ class Billet extends Modele
 
     public function supprimerBillets($idBillets)
     {
-        //       foreach ($idBillets) {
-        //$sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillets';
-        //$resultat = $idBillets->fetch();
-    //}
-//return $this->executerRequete($sql, array(
-//'numeroBillets' => $resultat,
-//))->rowCount() == 1;
+        $sql = 'DELETE FROM `t_billet` WHERE BIL_ID IN (:numeroBillets)';
+
+
+        return $this->executerRequete($sql, array(
+                'numeroBillets' => implode($idBillets,','),
+            ))->rowCount() == 1;
 }
 
 }
