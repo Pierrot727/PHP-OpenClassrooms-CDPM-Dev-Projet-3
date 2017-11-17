@@ -28,13 +28,25 @@ class Billet extends Modele
         return $billets;
     }
 
+    public function getBilletsVisible($page = 1)
+    {
+
+        $sql = 'select BIL_ID as id, BIL_DATE as date,'
+            . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
+            . ' WHERE BIL_VISIBLE= "OUI"'
+            . ' order by BIL_ID desc';
+        $billets = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        return $billets;
+    }
+
+
     /*
      * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
      */
     public function getBilletsTronques($page = 1, $limit = 50)
     {
         $valeur = intval($limit);
-        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, COUNT(com.COM_ID) as cptCom, SUM(com.COM_SIGNALEMENT) as cptSig'
+        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible, COUNT(com.COM_ID) as cptCom, SUM(com.COM_SIGNALEMENT) as cptSig'
             . ' from T_BILLET as billet'
             . ' LEFT JOIN T_COMMENTAIRE com ON com.BIL_ID = billet.BIL_ID'
             . ' GROUP BY billet.BIL_ID'
@@ -42,6 +54,21 @@ class Billet extends Modele
         $billetsTronques = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
         return $billetsTronques;
     }
+
+    /*
+ * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
+ */
+    public function getBilletsTronquesVisible($page = 1, $limit = 50)
+    {
+        $valeur = intval($limit);
+        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible'
+            . ' from T_BILLET as billet'
+            . ' WHERE BIL_VISIBLE= "OUI"'
+            . ' order by billet.BIL_ID desc';
+        $billetsTronquesVisible = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        return $billetsTronquesVisible;
+    }
+
 
     /** Renvoie les informations sur un billet
      *
@@ -99,9 +126,21 @@ class Billet extends Modele
     public function supprimerBillet($idBillet)
     {
         $sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillet';
+
         return $this->executerRequete($sql, array(
                 'numeroBillet' => $idBillet,
             ))->rowCount() == 1;
     }
+
+    public function supprimerBillets($idBillets)
+    {
+        //       foreach ($idBillets) {
+        //$sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillets';
+        //$resultat = $idBillets->fetch();
+    //}
+//return $this->executerRequete($sql, array(
+//'numeroBillets' => $resultat,
+//))->rowCount() == 1;
+}
 
 }

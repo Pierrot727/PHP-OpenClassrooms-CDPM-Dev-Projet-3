@@ -60,6 +60,21 @@ class Vue {
         echo $vue;
     }
 
+    public function genererAdmin($donnees) {
+        // Génération de la partie spécifique de la vue
+        $contenu = $this->genererFichier($this->fichier, $donnees);
+        // On définit une variable locale accessible par la vue pour la racine Web
+        // Il s'agit du chemin vers le site sur le serveur Web
+        // Nécessaire pour les URI de type controleur/action/id
+        $racineWeb = Configuration::get("racineWeb", "/");
+        // Génération du gabarit commun utilisant la partie spécifique
+        $vue = $this->genererFichier('Vue/gabaritAdmin.php',
+            array('titre' => $this->titre,'menu' => $this->menu, 'contenu' => $contenu, 'lien' => $this->lien,
+                'racineWeb' => $racineWeb));
+        // Renvoi de la vue générée au navigateur
+        echo $vue;
+    }
+
     /**
      * Génère un fichier vue et renvoie le résultat produit
      * 

@@ -10,7 +10,7 @@ use Blog\Modele\Utilisateur;
 /**
  * Contrôleur des actions d'administration
  *
- * @author Baptiste Pesquet
+ * @author Pierre-emmanuel Laporte
  */
 class ControleurAdmin extends ControleurSecurise
 {
@@ -36,9 +36,8 @@ class ControleurAdmin extends ControleurSecurise
         $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();
         $billets = $this->billet->getBilletsTronques();
-
         $login = $this->requete->getSession()->getAttribut("login");
-        $this->genererVue(array('nbBillets' => $nbBillets,
+        $this->genererVueAdmin(array('nbBillets' => $nbBillets,
             'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
     }
 
@@ -79,12 +78,12 @@ class ControleurAdmin extends ControleurSecurise
 
             if ($mdp === $verifMdp) {
                 $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
-                $this->rediriger("admin");
+                $this->rediriger("admin/utilisateurs");
             } else {
                 $param['msgErreur'] = 'Mot de passe non identique';
             }
         }
-        $this->genererVue($param);
+        $this->genererVueAdmin($param);
     }
 
     public function creationBillet()
@@ -97,17 +96,17 @@ class ControleurAdmin extends ControleurSecurise
             $this->rediriger("admin");
         }
         $billet = array('title' => "Mon titre", 'description' => '<p>Le contenu de mon article</p>');
-        $this->genererVue(array('billet' => $billet));
+        $this->genererVueAdmin(array('billet' => $billet));
     }
 
-    public function test()
+    public function general()
     {
-        var_dump($_POST);
+  //      var_dump($_POST);
         $ids = $this->requete->getParametre('check_list');
 
         switch ($this->requete->getParametre('form_action')) {
             case 'supprimer':
-                $this->billet->supprimerBillets($ids);
+                $this->billet->supprimerBillet($ids);
                 break;
             case "archiver":
                 $this->billet->archiverBillets($ids);
@@ -133,15 +132,49 @@ class ControleurAdmin extends ControleurSecurise
         }
 
         $billet = $this->billet->getBillet($id);
-        $this->genererVue(array('billet' => $billet));
+        $this->genererVueAdmin(array('billet' => $billet));
     }
 
     public function supprimerBillet()
     {
         $id = $this->requete->getParametre('id');
         $this->billet->supprimerBillet($id);
-        $this->rediriger("admin");
+        $this->rediriger("admin/administration");
     }
 
+    public function moderation() {
+        $nbBillets = $this->billet->getNombreBillets();
+        $nbCommentaires = $this->commentaire->countCommentaires();
+        $nbSignalements = $this->commentaire->getNombreSignalements();
+        $billets = $this->billet->getBilletsTronques();
+ //       $commentaire = $this->commentaire->getCommentaire($id);
 
+        $login = $this->requete->getSession()->getAttribut("login");
+        $this->genererVueAdmin(array('nbBillets' => $nbBillets,
+            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
+
+    }
+
+    public function administration()
+    {
+
+        $nbBillets = $this->billet->getNombreBillets();
+        $nbCommentaires = $this->commentaire->countCommentaires();
+        $nbSignalements = $this->commentaire->getNombreSignalements();
+        $billets = $this->billet->getBilletsTronques();
+        $login = $this->requete->getSession()->getAttribut("login");
+        $this->genererVueAdmin(array('nbBillets' => $nbBillets,
+            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
+    }
+
+    public function utilisateurs()
+    {
+        $nbBillets = $this->billet->getNombreBillets();
+        $nbCommentaires = $this->commentaire->countCommentaires();
+        $nbSignalements = $this->commentaire->getNombreSignalements();
+        $billets = $this->billet->getBilletsTronques();
+        $login = $this->requete->getSession()->getAttribut("login");
+        $this->genererVueAdmin(array('nbBillets' => $nbBillets,
+            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
+    }
 }

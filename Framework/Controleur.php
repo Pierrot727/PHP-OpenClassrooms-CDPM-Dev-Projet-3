@@ -71,6 +71,21 @@ abstract class Controleur {
         $vue->generer($donneesVue);
     }
 
+    protected function genererVueAdmin($donneesVue = array(), $action = null)
+    {
+        // Détermination du nom du fichier vue à partir du nom du contrôleur actuel
+        if($action)
+        {
+            $this->action = $action;
+        }
+        $classeControleur = get_class($this);
+        $controleur = str_replace("Blog\\Controleur\\Controleur", "", $classeControleur);
+
+        // Instanciation et génération de la vueF
+        $vue = new Vue($this->action, $controleur);
+        $vue->genererAdmin($donneesVue);
+    }
+
     /**
      * Effectue une redirection vers un contrôleur et une action spécifiques
      *
