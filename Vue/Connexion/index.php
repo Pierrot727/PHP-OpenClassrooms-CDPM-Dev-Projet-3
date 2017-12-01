@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="Contenu/css/signin.css" />
-<div class="container">
+<div class="row">
 
     <form action="connexion/connecter" method="post" class="form-signin">
         <?php $this->titre = "Mon Blog - Connexion" ?>
@@ -22,6 +21,3 @@
 <?php if (isset($msgErreur)): ?>
     <p><?= $msgErreur ?></p>
 <?php endif; ?>
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

@@ -1,7 +1,6 @@
 <?php
+
 namespace Blog\Framework;
-
-
 
 
 /*
@@ -14,7 +13,8 @@ namespace Blog\Framework;
  * @author Baptiste Pesquet
  */
 
-class Routeur {
+class Routeur
+{
 
 
     private $requete;
@@ -23,7 +23,8 @@ class Routeur {
      * Méthode principale appelée par le contrôleur frontal
      * Examine la requête et exécute l'action appropriée
      */
-    public function routerRequete() {
+    public function routerRequete()
+    {
         try {
 // Fusion des paramètres GET et POST de la requête
 // Permet de gérer uniformément ces deux types de requête HTTP
@@ -33,20 +34,20 @@ class Routeur {
             $action = $this->creerAction($this->requete);
 
             $controleur->executerAction($action);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->gererErreur($e);
         }
     }
 
     /**
      * Instancie le contrôleur approprié en fonction de la requête reçue
-     * 
+     *
      * @param Requete $requete Requête reçue
      * @return Instance d'un contrôleur
      * @throws Exception Si la création du contrôleur échoue
      */
-    private function creerControleur(Requete $requete) {
+    private function creerControleur(Requete $requete)
+    {
         // Grâce à la redirection, toutes les URL entrantes sont du type :
         // index.php?controleur=XXX&action=YYY&id=ZZZ
 
@@ -64,8 +65,7 @@ class Routeur {
             $controleur = new $classeControleur();
             $controleur->setRequete($requete);
             return $controleur;
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             header("HTTP/1.0 404 Not Found");
             throw new \Exception("Cette page n'existe pas !!!");
         }
@@ -73,11 +73,12 @@ class Routeur {
 
     /**
      * Détermine l'action à exécuter en fonction de la requête reçue
-     * 
+     *
      * @param Requete $requete Requête reçue
      * @return string Action à exécuter
      */
-    private function creerAction(Requete $requete) {
+    private function creerAction(Requete $requete)
+    {
         $action = "index";  // Action par défaut
         if ($requete->existeParametre('action')) {
             $action = $requete->getParametre('action');
@@ -87,13 +88,14 @@ class Routeur {
 
     /**
      * Gère une erreur d'exécution (exception)
-     * 
+     *
      * @param Exception $exception Exception qui s'est produite
      */
-    private function gererErreur(\Exception $exception) {
+    private function gererErreur(\Exception $exception)
+    {
         $vue = new Vue('erreur');
 
-        $donnees = ['msgErreur' => $exception->getMessage(), 'flash'=> $this->requete->getSession()->getMessageFlash()];
+        $donnees = ['msgErreur' => $exception->getMessage(), 'flash' => $this->requete->getSession()->getMessageFlash()];
         $vue->generer($donnees);
     }
 

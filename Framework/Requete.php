@@ -1,4 +1,5 @@
 <?php
+
 namespace Blog\Framework;
 
 /**
@@ -37,17 +38,6 @@ class Requete
     }
 
     /**
-     * Renvoie vrai si le paramètre existe dans la requête
-     *
-     * @param string $nom Nom du paramètre
-     * @return bool Vrai si le paramètre existe et sa valeur n'est pas vide
-     */
-    public function existeParametre($nom)
-    {
-        return (isset($this->parametres[$nom]) && $this->parametres[$nom] != "");
-    }
-
-    /**
      * Renvoie la valeur du paramètre demandé
      *
      * @param string $nom Nom d paramètre
@@ -61,6 +51,17 @@ class Requete
         } else {
             throw new Exception("Paramètre '$nom' absent de la requête");
         }
+    }
+
+    /**
+     * Renvoie vrai si le paramètre existe dans la requête
+     *
+     * @param string $nom Nom du paramètre
+     * @return bool Vrai si le paramètre existe et sa valeur n'est pas vide
+     */
+    public function existeParametre($nom)
+    {
+        return (isset($this->parametres[$nom]) && $this->parametres[$nom] != "");
     }
 
 }

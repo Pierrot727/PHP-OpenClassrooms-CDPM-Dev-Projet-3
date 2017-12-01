@@ -12,14 +12,13 @@
     <title>Administration</title>
     <base href="<?= $racineWeb ?>">
     <link rel="stylesheet" href="Contenu/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Contenu/css/styleAdmin.css"/>
+    <link rel="stylesheet" href="Contenu/css/administration.css"/>
     <script src="Contenu/js/jquery.js"></script>
     <script src="Contenu/js/bootstrap.min.js"></script>
     <script src='Contenu/js/tinymce/tinymce.min.js'></script>
 </head>
 
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -42,15 +41,17 @@
 </nav>
 
 <div class="container-fluid">
-    <?php var_dump($flash); ?>
     <div id="contenu">
         <div class="row">
 
 
             <?= $contenu ?>
         </div> <!-- #contenu -->
+        <?php var_dump($flash); ?>
+        <?php /*$this->maVar */ ?>
     </div>
 </div>
+
 
 </body>
 </html>

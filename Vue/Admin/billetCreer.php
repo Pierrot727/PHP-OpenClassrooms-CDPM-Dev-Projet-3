@@ -5,6 +5,8 @@
                required>
         <input name="titreBillet" placeholder="Entrez votre le titre"
                required>
+        <input name="photoBillet" placeholder="Entrez le nom exacte de la photo associée"
+               required>
         <textarea id="tiny" name="contenuBillet" placeholder="Le texte"></textarea>
         <button type="submit">Créer le nouveau billet</button>
     </form>

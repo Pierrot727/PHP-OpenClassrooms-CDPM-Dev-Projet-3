@@ -1,7 +1,9 @@
 <?php
+
 namespace Blog\Controleur;
 
 use Blog\Framework\Controleur;
+
 /**
  * Classe parente des contrôleurs soumis à authentification
  *
@@ -17,9 +19,28 @@ abstract class ControleurSecurise extends Controleur
 // Si non, l'utilisateur est renvoyé vers le contrôleur de connexion
         if ($this->requete->getSession()->existeAttribut("idUtilisateur")) {
             parent::executerAction($action);
-        }
-        else {
+        } else {
             $this->rediriger("connexion");
         }
     }
+
+
+    public function needAdminRole()
+    {
+        // verifier si user connecté à la role ADMIN
+        // si non
+        // HEADER HTTP403
+        $this->rediriger("connexion");
+
+    }
+
+    public function needModeratorRole()
+    {
+        // verifier si user connecté à la role ADMIN
+        // si non
+        // HEADER HTTP403
+        $this->rediriger("connexion");
+
+    }
+
 }

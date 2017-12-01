@@ -31,7 +31,7 @@ abstract class Modele
             $result = self::getBdd()->query($sql);
         } else {
             $result = self::getBdd()->prepare($sql);
-            foreach($params as $key => $value) {
+            foreach ($params as $key => $value) {
                 if (is_numeric($value)) {
                     $result->bindValue($key, $value, \PDO::PARAM_INT);
                 } else {
@@ -44,24 +44,24 @@ abstract class Modele
         return $result;
     }
 
-        /**
-         * Renvoie un objet de connexion à la BDD en initialisant la connexion au besoin
-         *
-         * @return PDO Objet PDO de connexion à la BDD
-         */
-        private
-        static function getBdd()
-        {
-            if (self::$bdd === null) {
-                // Récupération des paramètres de configuration BD
-                $dsn = Configuration::get("dsn");
-                $login = Configuration::get("login");
-                $mdp = Configuration::get("mdp");
-                // Création de la connexion
-                self::$bdd = new \PDO($dsn, $login, $mdp,
-                    array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
-            }
-            return self::$bdd;
+    /**
+     * Renvoie un objet de connexion à la BDD en initialisant la connexion au besoin
+     *
+     * @return PDO Objet PDO de connexion à la BDD
+     */
+    private
+    static function getBdd()
+    {
+        if (self::$bdd === null) {
+            // Récupération des paramètres de configuration BD
+            $dsn = Configuration::get("dsn");
+            $login = Configuration::get("login");
+            $mdp = Configuration::get("mdp");
+            // Création de la connexion
+            self::$bdd = new \PDO($dsn, $login, $mdp,
+                array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
         }
-
+        return self::$bdd;
     }
+
+}

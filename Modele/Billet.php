@@ -13,6 +13,13 @@ class Billet extends Modele
 {
 
     const MAX_PER_PAGE = 5;
+    const STATUT_HIDDEN = 'NON';
+    const STATUT_VISIBLE = 'OUI';
+
+
+    /*
+     * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
+     */
 
     /** Renvoie la liste des billets du blog
      *
@@ -28,6 +35,10 @@ class Billet extends Modele
         return $billets;
     }
 
+    /*
+ * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
+ */
+
     public function getBilletsVisible($page = 1)
     {
 
@@ -39,10 +50,6 @@ class Billet extends Modele
         return $billets;
     }
 
-
-    /*
-     * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
-     */
     public function getBilletsTronques($page = 1, $limit = 50)
     {
         $valeur = intval($limit);
@@ -55,20 +62,16 @@ class Billet extends Modele
         return $billetsTronques;
     }
 
-    /*
- * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
- */
     public function getBilletsTronquesVisible($page = 1, $limit = 50)
     {
         $valeur = intval($limit);
-        $sql = 'select billet.BIL_ID AS id, billet.BIL_CONTENU as contenu, billet.BIL_TITRE as titre, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible'
+        $sql = 'select billet.BIL_ID AS id, LEFT (billet.BIL_CONTENU, :limit) as contenu, billet.BIL_TITRE as titre, billet.BIL_PHOTO as photo, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible'
             . ' from T_BILLET as billet'
             . ' WHERE BIL_VISIBLE= "OUI"'
             . ' order by billet.BIL_ID desc';
-        $billetsTronquesVisible = $this->executerRequete($sql, array(), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+        $billetsTronquesVisible = $this->executerRequete($sql, array('limit' => $limit), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
         return $billetsTronquesVisible;
     }
-
 
     /** Renvoie les informations sur un billet
      *
@@ -101,29 +104,30 @@ class Billet extends Modele
         return $ligne['nbBillets'];
     }
 
-    public function creationBillet($dateBillet, $titreBillet, $contenuBillet)
+    public function billetCreer($dateBillet, $titreBillet, $contenuBillet)
     {
-        $sql = 'INSERT INTO T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_CONTENU= :contenuBillet';
+        $sql = 'INSERT INTO T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_PHOTO= :photoBillet, BIL_CONTENU= :contenuBillet';
         return $this->executerRequete($sql, array(
                 'dateBillet' => $dateBillet,
                 'titreBillet' => $titreBillet,
+                'photoBillet' => $titreBillet,
                 'contenuBillet' => $contenuBillet
             ))->rowCount() == 1;
     }
 
-    public function modifierBillet($idBillet, $dateBillet, $titreBillet, $contenuBillet)
+    public function billetModifier($idBillet, $dateBillet, $titreBillet, $contenuBillet)
     {
-        $sql = 'UPDATE T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_CONTENU= :contenuBillet WHERE BIL_ID=:id';
+        $sql = 'UPDATE T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_PHOTO= : photoBillet, BIL_CONTENU= :contenuBillet WHERE BIL_ID=:id';
         return $this->executerRequete($sql, array(
                 'dateBillet' => $dateBillet,
                 'titreBillet' => $titreBillet,
+                'photoBillet' => $photoBillet,
                 'contenuBillet' => $contenuBillet,
                 'id' => $idBillet
             ))->rowCount() == 1;
     }
 
-
-    public function supprimerBillet($idBillet)
+    public function billetSupprimer($idBillet)
     {
         $sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillet';
 
@@ -132,14 +136,25 @@ class Billet extends Modele
             ))->rowCount() == 1;
     }
 
-    public function supprimerBillets($idBillets)
+    public function billetsSupprimer($idBillets)
     {
         $sql = 'DELETE FROM `t_billet` WHERE BIL_ID IN (:numeroBillets)';
 
 
         return $this->executerRequete($sql, array(
-                'numeroBillets' => implode($idBillets,','),
+                'numeroBillets' => implode($idBillets, ','),
             ))->rowCount() == 1;
-}
+    }
+
+    public function billetVisible($idBillets, $statut = self::STATUT_HIDDEN)
+    {
+        $sql = 'UPDATE T_BILLET SET BIL_VISIBLE= :visibleBillet WHERE BIL_ID=:id';
+
+        return $this->executerRequete($sql, array(
+                'visibleBillet' => $statut,
+                'id' => $idBillets,
+            ))->rowCount() == 1;
+
+    }
 
 }

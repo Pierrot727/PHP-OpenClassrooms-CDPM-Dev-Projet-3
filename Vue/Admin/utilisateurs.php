@@ -47,29 +47,26 @@
                             <th>Prénom</th>
                             <th>Date de naissance</th>
                             <th>Email</th>
-                            <th>Modérateur</th>
-                            <th>Administrateur</th>
-                            <th>Blacklist</th>
+                            <th>Grade</th>
                             <th>Action(s)</th>
                             <th>Administration</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($billets as $billet):
+                        <?php foreach ($utilisateurs as $utilisateur):
                             ?>
                             <tr>
 
                                 <th><input id="checkbox" name="check_list[]"
-                                           value="<?= $this->nettoyer($billet['id']) ?>"
+                                           value="<?= $this->nettoyer($utilisateur['id']) ?>"
                                            type="checkbox"></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><?= $this->nettoyer($utilisateur['login']) ?></th>
+                                <th><?= $this->nettoyer($utilisateur['nom']) ?></th>
+                                <th><?= $this->nettoyer($utilisateur['prenom']) ?></th>
+                                <th><?= $this->nettoyer($utilisateur['naissance']) ?></th>
+                                <th><?= $this->nettoyer($utilisateur['email']) ?></th>
+                                <th><?= $this->nettoyer($utilisateur['grade']) ?></th>
+
                                 <th><a id="lienEditerUtilisateur" href="admin/utilisateurEditer"><img
                                                 src="Contenu/images/symbol/user-edit.png"
                                                 alt="Editer utilisateur"

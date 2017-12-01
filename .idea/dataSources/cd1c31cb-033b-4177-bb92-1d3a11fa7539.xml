@@ -38,90 +38,126 @@
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="18" parent="11" name="PRIMARY">
+    <column id="18" parent="11" name="BIL_VISIBLE">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NON&apos;</DefaultExpression>
+    </column>
+    <column id="19" parent="11" name="BIL_PHOTO">
+      <Position>6</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="20" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>BIL_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="19" parent="12" name="COM_ID">
+    <column id="21" parent="12" name="COM_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="20" parent="12" name="COM_DATE">
+    <column id="22" parent="12" name="COM_DATE">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="21" parent="12" name="COM_AUTEUR">
+    <column id="23" parent="12" name="COM_AUTEUR">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="12" name="COM_CONTENU">
+    <column id="24" parent="12" name="COM_CONTENU">
       <Position>4</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="12" name="BIL_ID">
+    <column id="25" parent="12" name="BIL_ID">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="12" name="COM_SIGNALEMENT">
+    <column id="26" parent="12" name="COM_SIGNALEMENT">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="25" parent="12" name="fk_com_bil">
+    <column id="27" parent="12" name="COM_APPROB">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NON&apos;</DefaultExpression>
+    </column>
+    <index id="28" parent="12" name="fk_com_bil">
       <ColNames>BIL_ID</ColNames>
     </index>
-    <key id="26" parent="12" name="PRIMARY">
+    <key id="29" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>COM_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="27" parent="12" name="fk_com_bil">
+    <foreign-key id="30" parent="12" name="fk_com_bil">
       <ColNames>BIL_ID</ColNames>
       <RefSchemaName>monblog</RefSchemaName>
       <RefTableName>t_billet</RefTableName>
       <RefColNames>BIL_ID</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="28" parent="13" name="UTIL_ID">
+    <column id="31" parent="13" name="UTIL_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="29" parent="13" name="UTIL_LOGIN">
+    <column id="32" parent="13" name="UTIL_LOGIN">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="13" name="UTIL_MDP">
+    <column id="33" parent="13" name="UTIL_MDP">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="31" parent="13" name="UTIL_NOM">
+    <column id="34" parent="13" name="UTIL_NOM">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="32" parent="13" name="UTIL_PRENOM">
+    <column id="35" parent="13" name="UTIL_PRENOM">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="33" parent="13" name="UTIL_DNAISSANCE">
+    <column id="36" parent="13" name="UTIL_DNAISSANCE">
       <Position>6</Position>
       <DataType>date|0</DataType>
     </column>
-    <column id="34" parent="13" name="UTIL_EMAIL">
+    <column id="37" parent="13" name="UTIL_EMAIL">
       <Position>7</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <key id="35" parent="13" name="PRIMARY">
+    <column id="38" parent="13" name="UTIL_MODO">
+      <Position>8</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NON&apos;</DefaultExpression>
+    </column>
+    <column id="39" parent="13" name="UTIL_ADMIN">
+      <Position>9</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NON&apos;</DefaultExpression>
+    </column>
+    <column id="40" parent="13" name="UTIL_BLACKLIST">
+      <Position>10</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NON&apos;</DefaultExpression>
+    </column>
+    <key id="41" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UTIL_ID</ColNames>
       <Primary>1</Primary>
