@@ -10,7 +10,6 @@ class ControleurAccueil extends Controleur
 {
 
     private $billet;
-    private $nombreCommentaireParBillet;
 
     public function __construct()
     {
@@ -21,11 +20,32 @@ class ControleurAccueil extends Controleur
     // Affiche la liste de tous les billets du blog
     public function index()
     {
-        $billets = $this->billet->getBilletsTronquesVisible(1, 200);
+        $page = 1;
+        $billets = $this->billet->getBilletsTronquesVisible($page, 200);
 
-        //  $nombreCommentairesParBillet = $this->Commmentaire->countCommentairesPerBillet();
-        $this->genererVue(array('billets' => $billets));
+        $nbPages = $this->billet->getNombrePages();
+        $this->genererVue(array('billets' => $billets,
+            'page' => $page,
+            'nbPages' => $nbPages
+        ));
     }
+
+
+    public function page()
+    {
+        $page = $this->requete->getParametre("id");
+        $billets = $this->billet->getBilletsTronquesVisible($page, 200);
+        var_dump($billets->fetchAll());
+        $nbPages = $this->billet->getNombrePages();
+        $this->genererVue(array('billets' => $billets,
+            'page' => $page,
+            'nbPages' => $nbPages
+        ), 'index');
+    }
+
+public function forbidden() {
+        $this->genererVue();
+}
 
 }
 

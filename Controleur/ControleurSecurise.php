@@ -3,6 +3,7 @@
 namespace Blog\Controleur;
 
 use Blog\Framework\Controleur;
+use Blog\Modele\Utilisateur;
 
 /**
  * Classe parente des contrôleurs soumis à authentification
@@ -11,6 +12,7 @@ use Blog\Framework\Controleur;
  */
 abstract class ControleurSecurise extends Controleur
 {
+
     public function executerAction($action)
     {
 // Vérifie si les informations utilisateur sont présents dans la session
@@ -30,7 +32,12 @@ abstract class ControleurSecurise extends Controleur
         // verifier si user connecté à la role ADMIN
         // si non
         // HEADER HTTP403
-        $this->rediriger("connexion");
+        if ($this->requete->getSession()->existeAttribut("grade") &&
+            $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
+        } else {
+            header('HTTP/1.0 403 Forbidden');
+            $this->rediriger("accueil/forbidden");
+        }
 
     }
 
@@ -40,6 +47,10 @@ abstract class ControleurSecurise extends Controleur
         // si non
         // HEADER HTTP403
         $this->rediriger("connexion");
+
+    }
+
+    public function needUserRole () {
 
     }
 

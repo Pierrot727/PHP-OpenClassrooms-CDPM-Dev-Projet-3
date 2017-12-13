@@ -41,20 +41,11 @@ class Commentaire extends Modele
         return $commentaire;
     }
 
-    public function countCommentairesPerBillet($idBillet)
-    {
-        $sql = 'SELECT COUNT(COM_ID) AS cpt'
-            . 'from T_COMMENTAIRE'
-            . ' where BIL_ID=:id';
-        $nombreCommentairesperBillet = $this->executerRequete($sql, array('id' => $idBillet))->fetch();
-        return $nombreCommentairesperBillet['cpt'];
-    }
-
     public function countCommentaires()
     {
         $sql = 'SELECT COUNT(COM_ID) AS cpt FROM T_COMMENTAIRE';
-        $nombreCommentairesperBillet = $this->executerRequete($sql)->fetch();
-        return $nombreCommentairesperBillet['cpt'];
+        $nombreCommentairesPerBillet = $this->executerRequete($sql)->fetch();
+        return $nombreCommentairesPerBillet['cpt'];
     }
 
     public function ajouterCommentaire($auteur, $contenu, $idBillet)
@@ -65,7 +56,21 @@ class Commentaire extends Modele
         $this->executerRequete($sql, array('auteur' => $auteur, 'contenu' => $contenu, 'id' => $idBillet));
     }
 
-    //Ajout Pierre Signalement
+    public function editerCommentaire ($auteur, $contenu, $idCommentaire) {
+        $sql = 'UPDATE T_COMMENTAIRE SET COM_AUTEUR = :auteur, COM_CONTENU = :contenu WHERE COM_ID = :idc'
+            . ' VALUES(:auteur, :contenu, :id)';
+        $this->executerRequete($sql, array('auteur' => $auteur, 'contenu' => $contenu, 'idc' => $idCommentaire));
+    }
+
+    public function supprimerCommentaire($idCommentaire){
+        $sql = 'DELETE FROM `t_commentaire` WHERE COM_ID = :idCommentaire';
+
+        return $this->executerRequete($sql, array(
+                'idCommentaire' => $idCommentaire,
+            ))->rowCount() == 1;
+    }
+
+
     public function ajouterUnSignalement($id)
     {
         $sql = 'UPDATE T_COMMENTAIRE SET COM_SIGNALEMENT = COM_SIGNALEMENT + 1 WHERE COM_ID = :id';

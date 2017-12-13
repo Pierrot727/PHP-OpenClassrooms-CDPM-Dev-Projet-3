@@ -33,15 +33,14 @@ class ControleurAdmin extends ControleurSecurise
     public function index()
     {
         //$this->needModeratorRole();
-
+$this->needAdminRole();
         $nbBillets = $this->billet->getNombreBillets();
         $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();
         $billets = $this->billet->getBilletsTronques();
         $login = $this->requete->getSession()->getAttribut("login");
-        //       $entete = $this->utilisateur->gestionAcces($login);
         $this->genererVueAdmin(array('nbBillets' => $nbBillets,
-            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login, /*'entete' => $entete*/));
+            'nbCommentaires' => $nbCommentaires, 'nbSignalements' => $nbSignalements, 'billets' => $billets, 'login' => $login));
     }
 
     public function modifierMdp()
@@ -94,7 +93,11 @@ class ControleurAdmin extends ControleurSecurise
         if ($this->requete->existeParametre("dateBillet") && $this->requete->existeParametre("titreBillet") && $this->requete->existeParametre("contenuBillet")) {
             $dateBillet = $this->requete->getParametre('dateBillet');
             $titreBillet = $this->requete->getParametre('titreBillet');
-            $photoBillet = $this->requete->getParametre('photoBillet');
+            if($this->requete->existeParametre('photoBillet')){
+                $photoBillet = $this->requete->getParametre('photoBillet');
+            }else{
+                $photoBillet = null;
+            }
             $contenuBillet = $this->requete->getParametre('contenuBillet');
             $this->billet->BilletCreer($dateBillet, $titreBillet, $photoBillet, $contenuBillet);
             $this->rediriger("admin");
@@ -191,6 +194,22 @@ class ControleurAdmin extends ControleurSecurise
         $id = $this->requete->getParametre('id');
         $this->commentaire->supprimerSignalement($id);
         $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Signalement(s) supprimé(s)");
+        $this->rediriger("admin/moderation");
+    }
+
+    public function supprimerCommentaire()
+    {
+        $id = $this->requete->getParametre('id');
+        $this->commentaire->supprimerCommentaire($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Commentaire supprimé");
+        $this->rediriger("admin/moderation");
+    }
+
+    public function modifierCommentaire()
+    {
+        $id = $this->requete->getParametre('id');
+        $this->commentaire->supprimerCommentaire($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Commentaire supprimé");
         $this->rediriger("admin/moderation");
     }
 }

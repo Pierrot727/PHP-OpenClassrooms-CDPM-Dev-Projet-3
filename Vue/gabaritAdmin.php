@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta name="description" content="backoffice">
+    <meta name="author" content="Pierre-Emmanuel Laporte">
 
     <title>Administration</title>
     <base href="<?= $racineWeb ?>">
@@ -19,6 +18,7 @@
 </head>
 
 <body>
+<?php $this->actif = "class='active'" ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -43,15 +43,49 @@
 <div class="container-fluid">
     <div id="contenu">
         <div class="row">
-
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li <?php if (($this->menuActif == "Tableau de bord")) { echo ($this->actif);} ?>>
+                        <a id="lienDashboard" href="admin/">
+                            <img src="Contenu/images/symbol/dashboard.png" alt="Tableau de bord" title="Tableau de bord"> Tableau de bord
+                        </a>
+                    </li>
+                    <li <?php if (($this->menuActif == "Administration")) { echo ($this->actif);} ?>>
+                        <a id="lienAdministration" href="admin/administration">
+                            <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration" title="Panneau d'administration">Administration</a><span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li <?php if (($this->menuActif == "Moderation")) { echo ($this->actif);} ?>>
+                        <a id="lienModeration" href="admin/moderation">
+                            <img src="Contenu/images/symbol/moderer.png" alt="Panneau de modération" title="Panneau de modération"> Panneau de modération
+                        </a>
+                    </li>
+                    <li <?php if (($this->menuActif == "Utilisateurs")) { echo ($this->actif);} ?>>
+                        <a id="lienUtilisateurs" href="admin/utilisateurs">
+                            <img src="Contenu/images/symbol/user.png" alt="Panneau de gestion utilisateur" title="Gestion utilisateur(s)">Utilisateur(s)
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
             <?= $contenu ?>
-        </div> <!-- #contenu -->
-        <?php var_dump($flash); ?>
-        <?php /*$this->maVar */ ?>
+        </div>
+
+        <div class="row">
+
+            <?php if ($flash =! "1" ): ?>
+                <div class="alert alert-success">
+                    <p><strong>Succes !</strong> <?= $flash ?></p>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($msgErreur)): ?>
+            <div class="alert alert-danger">
+                <p><strong>Attention !</strong> <?= $msgErreur ?></p>
+            </div>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
-
-
 </body>
 </html>

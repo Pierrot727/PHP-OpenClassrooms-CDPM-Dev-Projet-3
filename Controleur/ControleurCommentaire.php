@@ -31,7 +31,6 @@ class ControleurCommentaire extends Controleur {
         $idCommentaire = $this->requete->getParametre("id");
         $com = $this->commentaire->getCommentaire($idCommentaire);
         $this->commentaire->ajouterUnSignalement($idCommentaire);
-
         $this->rediriger("billet","index/" . $com['bil_id']);
 
     }

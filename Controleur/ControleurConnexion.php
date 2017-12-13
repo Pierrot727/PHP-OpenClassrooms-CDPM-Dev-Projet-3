@@ -30,6 +30,7 @@ class ControleurConnexion extends Controleur
                 $utilisateur = $this->utilisateur->getUtilisateur($login);
                 $this->requete->getSession()->setAttribut("idUtilisateur", $utilisateur['idUtilisateur']);
                 $this->requete->getSession()->setAttribut("login", $utilisateur['login']);
+                $this->requete->getSession()->setAttribut("grade", $utilisateur['grade']);
                 $this->rediriger("admin");
             } else {
                 $this->genererVue(array('msgErreur' =>

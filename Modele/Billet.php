@@ -7,12 +7,11 @@ use Blog\Framework\Modele;
 /**
  * Fournit les services d'accès aux genres musicaux
  *
- * @author Baptiste Pesquet
  */
 class Billet extends Modele
 {
 
-    const MAX_PER_PAGE = 5;
+    const MAX_PER_PAGE = 3;
     const STATUT_HIDDEN = 'NON';
     const STATUT_VISIBLE = 'OUI';
 
@@ -36,8 +35,8 @@ class Billet extends Modele
     }
 
     /*
- * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
- */
+     * Renvoie le début tronqué d'un billet pour l'admin (initialement) la valeur de la troncature est $limit
+    */
 
     public function getBilletsVisible($page = 1)
     {
@@ -62,14 +61,21 @@ class Billet extends Modele
         return $billetsTronques;
     }
 
-    public function getBilletsTronquesVisible($page = 1, $limit = 50)
+    public function getBilletsTronquesVisible($page = 1, $left = 50)
     {
-        $valeur = intval($limit);
-        $sql = 'select billet.BIL_ID AS id, LEFT (billet.BIL_CONTENU, :limit) as contenu, billet.BIL_TITRE as titre, billet.BIL_PHOTO as photo, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible'
+        $valeur = intval($left);
+        $sql = 'select billet.BIL_ID AS id, LEFT (billet.BIL_CONTENU, :left) as contenu, billet.BIL_TITRE as titre, billet.BIL_PHOTO as photo, billet.BIL_DATE as date, billet.BIL_VISIBLE as visible, COUNT(com.COM_ID) as cptCom'
             . ' from T_BILLET as billet'
+            . ' LEFT JOIN T_COMMENTAIRE com ON com.BIL_ID = billet.BIL_ID'
             . ' WHERE BIL_VISIBLE= "OUI"'
-            . ' order by billet.BIL_ID desc';
-        $billetsTronquesVisible = $this->executerRequete($sql, array('limit' => $limit), self::MAX_PER_PAGE, ($page - 1) * self::MAX_PER_PAGE);
+            . ' GROUP BY billet.BIL_ID'
+            . ' order by billet.BIL_ID desc'
+            . ' LIMIT :limit OFFSET :offset';
+        $billetsTronquesVisible = $this->executerRequete($sql, array(
+                'left' => $left,
+                'limit' => self::MAX_PER_PAGE,
+                'offset' => ($page - 1) * self::MAX_PER_PAGE)
+        );
         return $billetsTronquesVisible;
     }
 
@@ -82,13 +88,18 @@ class Billet extends Modele
     public function getBillet($idBillet)
     {
         $sql = 'select BIL_ID as id, BIL_DATE as date,'
-            . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
+            . ' BIL_TITRE as titre, BIL_CONTENU as contenu, BIL_PHOTO as photo from T_BILLET'
             . ' where BIL_ID= :billetID';
         $billet = $this->executerRequete($sql, array('billetID' => $idBillet));
         if ($billet->rowCount() > 0)
             return $billet->fetch();  // Accès à la première ligne de résultat
         else
             throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
+    }
+
+    public function getNombrePages()
+    {
+        return ceil($this->getNombreBillets() / self::MAX_PER_PAGE);
     }
 
     /**
@@ -104,20 +115,20 @@ class Billet extends Modele
         return $ligne['nbBillets'];
     }
 
-    public function billetCreer($dateBillet, $titreBillet, $contenuBillet)
+    public function billetCreer($dateBillet, $titreBillet, $photoBillet, $contenuBillet)
     {
         $sql = 'INSERT INTO T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_PHOTO= :photoBillet, BIL_CONTENU= :contenuBillet';
         return $this->executerRequete($sql, array(
                 'dateBillet' => $dateBillet,
                 'titreBillet' => $titreBillet,
-                'photoBillet' => $titreBillet,
+                'photoBillet' => $photoBillet,
                 'contenuBillet' => $contenuBillet
             ))->rowCount() == 1;
     }
 
-    public function billetModifier($idBillet, $dateBillet, $titreBillet, $contenuBillet)
+    public function billetModifier($idBillet, $dateBillet, $titreBillet, $photoBillet, $contenuBillet)
     {
-        $sql = 'UPDATE T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_PHOTO= : photoBillet, BIL_CONTENU= :contenuBillet WHERE BIL_ID=:id';
+        $sql = 'UPDATE T_BILLET SET BIL_DATE= :dateBillet, BIL_TITRE= :titreBillet, BIL_PHOTO = :photoBillet, BIL_CONTENU= :contenuBillet WHERE BIL_ID=:id';
         return $this->executerRequete($sql, array(
                 'dateBillet' => $dateBillet,
                 'titreBillet' => $titreBillet,

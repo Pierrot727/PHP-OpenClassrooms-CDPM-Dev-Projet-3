@@ -48,7 +48,7 @@ class Utilisateur extends Modele
     public
     function getUtilisateur($login)
     {
-        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_ADMIN AS admin, UTIL_MODO AS modo
+        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade
 FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
         $utilisateur = $this->executerRequete($sql, array('login' => $login));
         if ($utilisateur->rowCount() == 1)
@@ -64,6 +64,14 @@ fournis");
         $utilisateurs = $this->executerRequete($sql, array());
         return $utilisateurs;
     }
+
+    public function getAdministrateurs() {
+        $sql = 'select UTIL_LOGIN as login from t_utilisateur'
+            . ' WHERE UTIL_GRADE= "Administrateur"';
+        $resultat = $this->executerRequete($sql);
+        return $administrateurs;
+    }
+
 
     /**
      * Modification d'un utilisateur existant - pierre

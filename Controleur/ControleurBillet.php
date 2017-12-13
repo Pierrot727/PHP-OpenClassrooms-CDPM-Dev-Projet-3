@@ -31,9 +31,10 @@ class ControleurBillet extends Controleur
     {
         $idBillet = $this->requete->getParametre("id");
         $billet = $this->billet->getBillet($idBillet);
+        $billets = $this->billet->getBilletsTronquesVisible(1, 200);
         $commentaires = $this->commentaire->getCommentaires($idBillet);
 
-        $this->genererVue(array('billet' => $billet, 'commentaires' => $commentaires));
+        $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires));
     }
 
     // Ajoute un commentaire sur un billet

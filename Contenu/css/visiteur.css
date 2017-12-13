@@ -196,6 +196,13 @@ nav .menu>li:first-child{
     color:#888;
 }
 
+.left-block .comment-signaler{
+    padding-left:10px;
+    font-weight: normal;
+    font-size:1em;
+    /* display:block; */
+    color:white;
+}
 
 
 .left-block .level1{
@@ -519,7 +526,7 @@ form input[type=text]:focus, form textarea:focus{
     outline:0;
 }
 
-form button, .left-block a {
+form input, .left-block a {
     border:none;
     background:#ffc013;
     /* padding:5px; */
@@ -544,6 +551,7 @@ form button, .left-block a {
 
 .pagination {
     /* margin:0 auto;*/
+    display: flex;
 }
 
 .pagination ul{
@@ -588,70 +596,22 @@ form button, .left-block a {
 
 /* admin crud */
 
-.crud-box {
-    background: #eee;
-    padding: 30px;
-    /* min-height: 300px; */
-    width: 100%;
-    max-width: 300px;
-    border: 1px solid #ddd;
-    margin: 0 20px 0 0;
-    float:left;
+
+.modif.inline {
+    display: inline-block;
 }
-
-.max-error{
-    max-width: 300px;
+.modif label {
+    min-width: 120px;
 }
-
-.larger {
-    max-width: 900px;
-}
-
-.crud-box a {
-    color:#777;
-    text-decoration:none;
-}
-
-
-.crud-menu{
-    padding:0;
-    margin-bottom: 20px;
-}
-
-.crud-menu h3{
-    font-size:14px;
-}
-
-
-.crud-menu ul{
-    list-style-type:none;
-    padding-left:15px;
-
-}
-
-.crud-menu ul li{
-    margin: 15px 0;
-}
-
-.crud-menu a, .crud-menu span{
-    font-family:"roboto slab";
+.modif {
+    background:#555;
+    height: 46px;
     color: #000;
-    font-size: 12px;
-    text-decoration:none;
-}
-
-.crud-menu span{
-    color: #888;
-}
-
-
-.comment-container {
-    width : 100%;
-    max-width:1000px;
-}
-.crud-container {
-    width : 100%;
-    max-width:800px;
+    font-size: 23px;
+    height: 46px;
+    line-height: 40px;
+    padding: 0 0 0 20px;
+    margin: 20px 0 20px;
 }
 
 
@@ -784,7 +744,7 @@ footer .link-zone a  {
     }
 
     nav .menu {
-        display:none
+        display:none;
     }
 
     header {
