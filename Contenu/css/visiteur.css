@@ -443,12 +443,22 @@ td.check-cell{
 /* formulaires */
 
 .message{
-    background: #000103;
-    color: #fff;
+    background: rgba(125, 125, 125, 0.8);
+    color: #d7d7d7;
     font-size: 1,8em;
     border-left: 6px solid #ffc013;
     padding: 10px;
     margin-bottom:20px;
+}
+
+.message .bas {
+    color: #d7d7d7;
+    font-size: 1em;
+    text-align: center;
+}
+
+.message .bouton {
+    color: #888888;
 }
 
 #login-form {

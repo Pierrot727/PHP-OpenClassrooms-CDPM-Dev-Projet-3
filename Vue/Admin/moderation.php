@@ -39,9 +39,11 @@
                                     <a id="lienSupprimerCommentaire" href="admin/supprimerCommentaire/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/commentaire-sup.png" alt="supprimer commentaire" title="Suprimer le commentaire">
                                     </a>
+                                    <?php if ($commentaire['signalement'] > 0) : ?>
                                     <a id="lienSupprimerSignalement" href="admin/supprimerSignalement/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/signalement-sup.png" alt="supprimer signalement" title="Supprimer le/les signalements">
                                     </a>
+                                    <?php endif; ?>
                                 </th>
                             </tr>
                         <?php endforeach; ?>

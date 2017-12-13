@@ -7,24 +7,29 @@
 
             <?php $this->titre = "Mon Blog - Ajouter un nouveau billet" ?>
             <h2>Création d'un nouveau billet</h2>
+            <br>
+            <hr>
             <form method="post" class="crud-box">
-                <div>
-                    <label>Date</label>
-                    <input name="dateBillet" class="crud-container" placeholder="Entrez la date de ce billet" required>
-                </div>
-                <div>
-                    <label>Titre du billet</label>
-                    <input name="titreBillet" placeholder="Entrez votre le titre" required>
-                </div>
-                <div>
-                    <label>Illustration</label>
-                    <input name="photoBillet" placeholder="Entrez le nom exacte de la photo associée">
-                </div>
-                <div>
-                    <label>Texte</label>
-                    <textarea id="tiny" name="contenuBillet" placeholder="Le texte"></textarea>
-                </div>
-                <button type="submit">Créer le nouveau billet</button>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4 form-group">
+
+                        <label>Date (AAAA-MM-DD)</label><br>
+                        <input name="dateBillet" class="crud-container" placeholder="Entrez la date de ce billet"
+                               required>
+                    </div>
+                    <div class="col-xs-4 col-md-4 form-group">
+                        <label>Titre du billet</label><br>
+                        <input name="titreBillet" placeholder="Entrez votre le titre" required>
+                    </div>
+                    <div class="col-xs-4 col-md-4 form-group">
+                        <label>Illustration</label><br>
+                        <input name="photoBillet" placeholder="Photo associée">
+                    </div>
+                    <div class="col-xs-12 col-md-12 form-group">
+                        <label>Texte</label>
+                        <textarea rows="20" id="tiny" name="contenuBillet" placeholder="Le texte"></textarea>
+                    </div>
+                    <button type="submit">Créer le nouveau billet</button>
             </form>
 
             <script>
@@ -35,34 +40,5 @@
             </script>
             <hr> <!-- Barre séparateur -->
         </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="login-box">
-        <h2>Laissez-moi un message</h2>
-        <hr>
-        <form id="login-form" method="post" action="\verif-login">
-
-            <label>Nom</label>
-            <div>
-                <input type="text" class="largeur-totale bords-arrondis">
-            </div>
-
-            <label>Adress e.mail</label>
-            <div>
-                <input type="text" class="largeur-totale bords-arrondis">
-            </div>
-
-            <label>Message</label>
-            <div>
-                <textarea class="largeur-totale bords-arrondis" rows="8"></textarea>
-            </div>
-
-
-            <p>
-                <button class="login-button bords-arrondis" type="submit">Envoyer</button>
-            </p>
-        </form>
     </div>
 </div>

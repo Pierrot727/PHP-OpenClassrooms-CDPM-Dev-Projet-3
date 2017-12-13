@@ -45,17 +45,14 @@ class Utilisateur extends Modele
      * @return mixed L'utilisateur
      * @throws \Exception Si aucun utilisateur ne correspond aux paramètres
      */
-    public
-    function getUtilisateur($login)
+    public function getUtilisateur($login)
     {
-        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade
-FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
+        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
         $utilisateur = $this->executerRequete($sql, array('login' => $login));
         if ($utilisateur->rowCount() == 1)
             return $utilisateur->fetch(); // Accès à la première ligne de résultat
         else
-            throw new \Exception("Aucun utilisateur ne correspond aux identifiants
-fournis");
+            throw new \Exception("Aucun utilisateur ne correspond aux identifiants fournis");
     }
 
     public function getUtilisateurs()
@@ -65,8 +62,9 @@ fournis");
         return $utilisateurs;
     }
 
-    public function getAdministrateurs() {
-        $sql = 'select UTIL_LOGIN as login from t_utilisateur'
+    public function getAdministrateurs()
+    {
+        $sql = 'SELECT UTIL_LOGIN AS login FROM t_utilisateur'
             . ' WHERE UTIL_GRADE= "Administrateur"';
         $resultat = $this->executerRequete($sql);
         return $administrateurs;
@@ -108,6 +106,20 @@ fournis");
         $sql = 'INSERT INTO T_UTILISATEUR SET UTIL_LOGIN= :login, UTIL_MDP= :mdp, UTIL_NOM= :nom, UTIL_PRENOM= :prenom, UTIL_DNAISSANCE= :dateNaissance, UTIL_EMAIL= :email';
         return $this->executerRequete($sql, array(
                 'login' => $login,
+                'mdp' => $pass_hache,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'dateNaissance' => $dateNaissance,
+                'email' => $email_verifie
+            ))->rowCount() == 1;
+
+    }
+
+    public function utilisateurModifier($mdp, $nom, $prenom, $dateNaissance, $email) {
+        $pass_hache = password_hash($mdp, PASSWORD_BCRYPT);
+        $email_verifie = $email;
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_MDP= :mdp, UTIL_NOM= :nom, UTIL_PRENOM= :prenom, UTIL_DNAISSANCE= :dateNaissance, UTIL_EMAIL= :email';
+        return $this->executerRequete($sql, array(
                 'mdp' => $pass_hache,
                 'nom' => $nom,
                 'prenom' => $prenom,

@@ -1,3 +1,8 @@
+<?php
+require 'recaptchalib.php';
+$siteKey = 'XXXX'; // votre clé publique
+$secret = 'YYYY'; // votre clé privée
+?>
 <div class="row">
     <div class="login-box">
         <h2>Laissez-moi un message</h2>
@@ -19,10 +24,11 @@
                 <textarea class="largeur-totale bords-arrondis" rows="8"></textarea>
             </div>
 
-
+            <div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
             <p>
-                <button class="login-button bords-arrondis" type="submit">Envoyer</button>
+                <button class="bords-arrondis" type="submit">Envoyer</button>
             </p>
         </form>
     </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js"></script>

@@ -33,7 +33,7 @@ class ControleurAdmin extends ControleurSecurise
     public function index()
     {
         //$this->needModeratorRole();
-$this->needAdminRole();
+        $this->needAdminRole();
         $nbBillets = $this->billet->getNombreBillets();
         $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();
@@ -66,6 +66,7 @@ $this->needAdminRole();
 
     public function inscription()
     {
+        $this->needAdminRole();
         $param = array();
         if ($this->requete->existeParametre("pseudo") && $this->requete->existeParametre("nom") && $this->requete->existeParametre("prenom")
             && $this->requete->existeParametre("dateNaissance") && $this->requete->existeParametre("email") && $this->requete->existeParametre("mdp")
@@ -119,7 +120,6 @@ $this->needAdminRole();
                 $this->billet->archiverBillets($ids);
                 break;
             default:
-                //
         }
 
     }
@@ -186,6 +186,10 @@ $this->needAdminRole();
     {
         $utilisateurs = $this->utilisateur->getUtilisateurs();
         $this->genererVueAdmin(array('utilisateurs' => $utilisateurs));
+    }
+
+    public function utilisateurModifier() {
+
     }
 
 

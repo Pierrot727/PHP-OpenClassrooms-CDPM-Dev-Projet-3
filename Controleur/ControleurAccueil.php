@@ -22,7 +22,6 @@ class ControleurAccueil extends Controleur
     {
         $page = 1;
         $billets = $this->billet->getBilletsTronquesVisible($page, 200);
-
         $nbPages = $this->billet->getNombrePages();
         $this->genererVue(array('billets' => $billets,
             'page' => $page,
@@ -35,7 +34,6 @@ class ControleurAccueil extends Controleur
     {
         $page = $this->requete->getParametre("id");
         $billets = $this->billet->getBilletsTronquesVisible($page, 200);
-        var_dump($billets->fetchAll());
         $nbPages = $this->billet->getNombrePages();
         $this->genererVue(array('billets' => $billets,
             'page' => $page,
@@ -43,9 +41,15 @@ class ControleurAccueil extends Controleur
         ), 'index');
     }
 
-public function forbidden() {
+    public function splash()
+    {
         $this->genererVue();
-}
+    }
+
+    public function forbidden()
+    {
+        $this->genererVue();
+    }
 
 }
 

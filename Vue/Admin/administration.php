@@ -13,7 +13,8 @@
             signalements </br>
             <hr>
             <a id="lienCrBillet" href="admin/billetCreer">
-                <img src="Contenu/images/symbol/nouveau.png" alt="Nouveau billet" title="Nouveau billet"> Créer un nouveau billet
+                <img src="Contenu/images/symbol/nouveau.png" alt="Nouveau billet" title="Nouveau billet"> Créer un
+                nouveau billet
             </a>
 
             <form action="admin/general" method="post">
@@ -52,7 +53,8 @@
                                 <th><?= $this->nettoyer($billet['cptSig']) ?></th>
                                 <th><?= $this->nettoyer($billet['visible']) ?></th>
                                 <th><a id="lienModifBillet" href="admin/billetModifier/<?= $billet['id'] ?>">
-                                        <img src="Contenu/images/symbol/modifier.png" alt="modifier billet" title="Cliquez pour modifier le billet selectionné">
+                                        <img src="Contenu/images/symbol/modifier.png" alt="modifier billet"
+                                             title="Cliquez pour modifier le billet selectionné">
                                     </a>
                                     <a href="#modal-dialog" class="modal-toggle" data-toggle="modal"
                                        data-href=""
@@ -60,30 +62,37 @@
                                        data-modal-text="Are you sure you want to delete {$property.address_string}?"
                                        data-modal-confirm-url="{$base_url}residential-lettings/properties/do-delete/property/{$property.id}">
                                         <i class="icon-trash"></i>
-                                        <img src="Contenu/images/symbol/supprimer.png" alt="supprimer billet" title="Cliquez pour supprimer le billet selectionné"
+                                        <img src="Contenu/images/symbol/supprimer.png" alt="supprimer billet"
+                                             title="Cliquez pour supprimer le billet selectionné"
                                              data-toggle="modal" data-target="#myModal">
                                     </a>
 
                                     <?php if ($billet['visible'] == "NON") : ?>
-                                        <a id="lienBilletVisible" href="admin/billetVisible/<?= $billet['id'] . '?statut=OUI' ?>">
-                                            <img src="Contenu/images/symbol/visible.png" alt="Rendre visible le billet" title="Cliquez pour rendre visible le billet">
+                                        <a id="lienBilletVisible"
+                                           href="admin/billetVisible/<?= $billet['id'] . '?statut=OUI' ?>">
+                                            <img src="Contenu/images/symbol/visible.png" alt="Rendre visible le billet"
+                                                 title="Cliquez pour rendre visible le billet">
                                         </a>
                                     <?php else : ?>
-                                        <a id="lienBilletMasquer" href="admin/billetVisible/<?= $billet['id'] . '?statut=NON' ?>">
-                                            <img src="Contenu/images/symbol/masquer.png" alt="Masquer billet" title="Cliquez pour masquer le billet">
+                                        <a id="lienBilletMasquer"
+                                           href="admin/billetVisible/<?= $billet['id'] . '?statut=NON' ?>">
+                                            <img src="Contenu/images/symbol/masquer.png" alt="Masquer billet"
+                                                 title="Cliquez pour masquer le billet">
                                         </a>
                                     <?php endif; ?>
                                 </th>
                             </tr>
                         <?php endforeach; ?>
 
+                        <div class="col-xs-12 col-md-12 form-group">
+                            <select name="form_action">
+                                <option value="">Choisissez une action groupée</option>
+                                <option value="supprimer">Supprimer</option>
+                                <option value="archiver">Masquer publications</option>
+                            </select>
 
-                        <select name="form_action">
-                            <option value="">Choisissez une action</option>
-                            <option value="supprimer">Supprimer</option>
-                            <option value="archiver">Activer/suspendre publication</option>
-                        </select>
-                        <button type="submit" name="action_valider">Valider</button>
+                            <button type="submit" name="action_valider">Valider</button>
+                        </div>
                 </div>
 
             </form>
@@ -101,7 +110,8 @@
                             <p>Etes-vous sur de vouloir supprimer le billet concerné ?</p>
                         </div>
                         <div class="modal-footer">
-                            <a href="admin/billetSupprimer/<?= $billet['id'] ?>" id="btnYes" class="btn confirm">Oui, je
+                            <a href="admin/billetSupprimer/<?= $billet['id'] ?>" id="btnYes" class="btn btn-danger">Oui,
+                                je
                                 confirme</a>
                             <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Non, j'annule</a>
                         </div>

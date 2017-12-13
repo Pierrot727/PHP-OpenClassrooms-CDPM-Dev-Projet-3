@@ -5,19 +5,32 @@
         <div id="contenu">
 
             <h2>Modifier un billet existant</h2>
+            <hr>
 
-
-            <div class="col-sm-8 contact-form">
+            <div class="col-sm-12 contact-form">
                 <form id="contact" method="post" class="form" role="form">
                     <div class="row">
-                        <div class="col-xs-6 col-md-6 form-group">
-                            <input class="form-control" id="name" name="dateBillet" placeholder="Entrez la date de ce billet" type="text" value="<?= $billet['date'] ?>" required autofocus/>
+                        <div class="col-xs-4 col-md-4 form-group">
+                            <label>Date</label>
+                            <input class="form-control" id="name" name="dateBillet"
+                                   placeholder="Entrez la date de ce billet" type="text" value="<?= $billet['date'] ?>"
+                                   required autofocus/>
                         </div>
-                        <div class="col-xs-6 col-md-6 form-group">
-                            <input class="form-control" id="email" name="titreBillet" placeholder="Entrez votre le titre" type="text" value="<?= $billet['titre'] ?>" required/>
+                        <div class="col-xs-4 col-md-4 form-group">
+                            <label>Titre</label>
+                            <input class="form-control" id="email" name="titreBillet"
+                                   placeholder="Entrez votre le titre" type="text" value="<?= $billet['titre'] ?>"
+                                   required/>
+                        </div>
+                        <div class="col-xs-4 col-md-4 form-group">
+                            <label>Image</label>
+                            <input class="form-control" id="email" name="imageBillet"
+                                   placeholder="Entrez votre le titre" type="text" value="<?= $billet['photo'] ?>"/>
                         </div>
                     </div>
-                    <textarea class="form-control" id="tiny" name="contenuBillet" placeholder="Le texte" rows="5"><?= $billet['contenu'] ?>
+                    <label>Contenu du billet</label>
+                    <textarea class="form-control" rows="20" id="tiny" name="contenuBillet" placeholder="Le texte">
+                        <?= $billet['contenu'] ?>
                     </textarea>
                     <br/>
                     <div class="row">

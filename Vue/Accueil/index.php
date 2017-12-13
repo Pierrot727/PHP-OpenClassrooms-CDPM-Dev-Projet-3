@@ -1,6 +1,12 @@
+<?php   //if (!isset($_COOKIE['no_splash'])) {      // Pas de cookie, chargement du splash
+        // header('Location: accueil/splash');  // Redirection
+        // } else {                                    // Si le cookie est présent
+?>
+
+
 <div class="row pagination">
     <ul>
-        <?php for ($i = 1;  $i <= $nbPages;$i++): ?>
+        <?php for ($i = 1; $i <= $nbPages; $i++): ?>
             <li class="bords-arrondis <?= ($i == $page) ? "page-actuelle" : "" ?>">
                 <a href="accueil/page/<?= $i ?>"><?= $i ?></a>
             </li>
@@ -45,3 +51,5 @@
     </ul>
 
 </div>
+
+<?php // } ?>
