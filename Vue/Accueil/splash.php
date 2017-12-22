@@ -1,15 +1,7 @@
-<?php
-
-$expire = time() + 60 * 60 * 24;                    // Cookie expire dans 1 jour - 60 seconds * 60 minutes * 24 hours
-setcookie("no_splash", "1", $expire);  // Paramatréage du cookie : setcookie(cookie_name, cookie_value, expiry_time)
-
-?>
-
 <div class="row">
     <div class="message">
         <h2>Bienvenue sur le site du projet 3 d'OpenClassRoom</h2>
         <hr>
-        <form id="login-form" method="post" action="accueil">
 
             <b>Enoncé :</b> Vous venez de décrocher un contrat avec Jean Forteroche, acteur et écrivain. Il travaille
             actuellement sur son prochain roman,<br>
@@ -23,8 +15,8 @@ setcookie("no_splash", "1", $expire);  // Paramatréage du cookie : setcookie(co
                 Ce site démo a été dévellopé avec Bootstrap 3.3.7<br>
 
                 <br>
-                Il est disponible en OpenSource sur <a href="https://github.com/Pierrot727/PHP-OpenClassrooms-CDPM-Dev-Projet-3">dépot GIT</a><br>
-                <a href="https://www.pierre-laporte.net/openclassrooms/cdpm/projet3/notice.pdf">Documentation du site</a>
+                Il est disponible en OpenSource sur <a href="https://github.com/Pierrot727/PHP-OpenClassrooms-CDPM-Dev-Projet-3">dépot GIT <img src="Contenu/images/symbol/gitlogo.png" alt="Logo Git"></a><br>
+                <a href="https://www.pierre-laporte.net/git/openclassrooms/cdpm-dev/projet3/Docs/Notice.pdf">Documentation du site</a>
                 <br>
                 Pour tester le site vous pouvez vous identifier sur l'interface admin :<br>
                 <br>
@@ -36,9 +28,8 @@ setcookie("no_splash", "1", $expire);  // Paramatréage du cookie : setcookie(co
                 <br>
 
                 <p>
-                    <button class="bouton" type="submit">Ok, C'est parti !</button>
+                    <a class="btn btn-info" href="">Ok, C'est parti !</a>
                 </p>
             </div>
-        </form>
     </div>
 </div>

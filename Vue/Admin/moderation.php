@@ -33,10 +33,10 @@
                                     <?= ($this->nettoyer($commentaire['signalement']))? "Oui" : "Non" ?>
                                 </th>
                                 <th>
-                                    <a id="lienEditerCommentaire" href="admin/EditerCommentaire/<?= $commentaire['idc'] ?>">
+                                    <a id="lienEditerCommentaire" href="admin/commentaireEditer/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/commentaire-edit.png" alt="modifier billet" title="Editer le commentaire">
                                     </a>
-                                    <a id="lienSupprimerCommentaire" href="admin/supprimerCommentaire/<?= $commentaire['idc'] ?>">
+                                    <a id="lienSupprimerCommentaire" href="admin/commentaireSupprimer/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/commentaire-sup.png" alt="supprimer commentaire" title="Suprimer le commentaire">
                                     </a>
                                     <?php if ($commentaire['signalement'] > 0) : ?>

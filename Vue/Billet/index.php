@@ -43,12 +43,12 @@
             <form class="largeur-totale" action="billet/commenter" method="post">
                 <label>Pseudo</label>
                 <div>
+                    <?php if (isset($login)) { echo($login);} else ?> <a href="https://www.w3schools.com">Vous devez être enregitré pour poster un commentaire</a>
                     <input type="text" class="bords-arrondis largeur-moyenne" name="auteur" required/>
-                    (lettres non accentuées et tiret uniquement)
                 </div>
                 <label>Commentaire</label>
                 <div>
-                    <textarea rows="8" class="bords-arrondis largeur-totale" name="contenu"></textarea>
+                    <textarea enabled=false rows="8" class="bords-arrondis largeur-totale" name="contenu"></textarea>
                 </div>
                 <p>
                     <input type="hidden" name="id" value="<?= $billet['id'] ?>">

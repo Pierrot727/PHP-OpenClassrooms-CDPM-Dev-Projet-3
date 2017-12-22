@@ -97,7 +97,7 @@ class ControleurAdmin extends ControleurSecurise
             if($this->requete->existeParametre('photoBillet')){
                 $photoBillet = $this->requete->getParametre('photoBillet');
             }else{
-                $photoBillet = null;
+                $photoBillet = "defaut";
             }
             $contenuBillet = $this->requete->getParametre('contenuBillet');
             $this->billet->BilletCreer($dateBillet, $titreBillet, $photoBillet, $contenuBillet);
@@ -201,19 +201,25 @@ class ControleurAdmin extends ControleurSecurise
         $this->rediriger("admin/moderation");
     }
 
-    public function supprimerCommentaire()
+    public function commentaireSupprimer()
     {
         $id = $this->requete->getParametre('id');
-        $this->commentaire->supprimerCommentaire($id);
+        $this->commentaire->commentaireSupprimer($id);
         $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Commentaire supprimé");
         $this->rediriger("admin/moderation");
     }
 
-    public function modifierCommentaire()
+    public function commentaireEditer()
     {
         $id = $this->requete->getParametre('id');
-        $this->commentaire->supprimerCommentaire($id);
-        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Commentaire supprimé");
-        $this->rediriger("admin/moderation");
+        if ($this->requete->existeParametre("contenuCommentaire")) {
+            $contenuCommentaire = $this->requete->getParametre('contenuCommentaire');
+            $this->commentaire->commentaireEditer($contenuCommentaire, $id);
+            $this->rediriger("moderation");
+        }
+
+        $commmentaire = $this->commentaire->getCommentaire($id);
+        $this->genererVueAdmin(array('commentaire' => $commmentaire));
+
     }
 }

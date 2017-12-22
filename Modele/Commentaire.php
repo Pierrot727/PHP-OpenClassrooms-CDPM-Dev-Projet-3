@@ -56,13 +56,12 @@ class Commentaire extends Modele
         $this->executerRequete($sql, array('auteur' => $auteur, 'contenu' => $contenu, 'id' => $idBillet));
     }
 
-    public function editerCommentaire ($auteur, $contenu, $idCommentaire) {
-        $sql = 'UPDATE T_COMMENTAIRE SET COM_AUTEUR = :auteur, COM_CONTENU = :contenu WHERE COM_ID = :idc'
-            . ' VALUES(:auteur, :contenu, :id)';
-        $this->executerRequete($sql, array('auteur' => $auteur, 'contenu' => $contenu, 'idc' => $idCommentaire));
+    public function commentaireEditer ($contenu, $idCommentaire) {
+        $sql = 'UPDATE T_COMMENTAIRE SET COM_CONTENU = :contenu WHERE COM_ID = :idc';
+        $this->executerRequete($sql, array('contenu' => $contenu, 'idc' => $idCommentaire));
     }
 
-    public function supprimerCommentaire($idCommentaire){
+    public function commentaireSupprimer($idCommentaire){
         $sql = 'DELETE FROM `t_commentaire` WHERE COM_ID = :idCommentaire';
 
         return $this->executerRequete($sql, array(

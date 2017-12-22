@@ -1,9 +1,3 @@
-<?php   //if (!isset($_COOKIE['no_splash'])) {      // Pas de cookie, chargement du splash
-        // header('Location: accueil/splash');  // Redirection
-        // } else {                                    // Si le cookie est présent
-?>
-
-
 <div class="row pagination">
     <ul>
         <?php for ($i = 1; $i <= $nbPages; $i++): ?>
@@ -51,5 +45,3 @@
     </ul>
 
 </div>
-
-<?php // } ?>
