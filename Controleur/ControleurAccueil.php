@@ -5,6 +5,7 @@ namespace Blog\Controleur;
 use Blog\Framework\Controleur;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
+use Blog\Modele\Utilisateur;
 
 class ControleurAccueil extends Controleur
 {
@@ -58,9 +59,24 @@ class ControleurAccueil extends Controleur
     }
 
     public function inscription() {
-        if ($this->requete->existeParametre("nom")) {
-            die();
-        }
+            if ($this->requete->existeParametre("pseudo") && $this->requete->existeParametre("nom") && $this->requete->existeParametre("prenom")
+                && $this->requete->existeParametre("dateNaissance") && $this->requete->existeParametre("email") && $this->requete->existeParametre("mdp")
+                && $this->requete->existeParametre("verif_mdp")) {
+                $mdp = $this->requete->getParametre('mdp');
+                $verifMdp = $this->requete->getParametre('verif_mdp');
+                $pseudo = $this->requete->getParametre('pseudo');
+                $nom = $this->requete->getParametre('nom');
+                $prenom = $this->requete->getParametre('prenom');
+                $dateNaissance = $this->requete->getParametre('dateNaissance');
+                $email = $this->requete->getParametre('email');
+
+                if ($mdp === $verifMdp) {
+                    $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
+                    $this->rediriger("admin");
+                } else {
+                    $param['msgErreur'] = 'Mot de passe non identique';
+                }
+            }
         $this->genererVue();
     }
 

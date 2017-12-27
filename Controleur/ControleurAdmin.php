@@ -89,6 +89,38 @@ class ControleurAdmin extends ControleurSecurise
         $this->genererVueAdmin($param);
     }
 
+    public function utilisateurSupprimer() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurSupprimer($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Utilisateur supprimé");
+        $this->rediriger("admin","utilisateurs");
+    }
+
+    public function utilisateurModerateur() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurModerateur($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Utilisateur upgradé Modérateur");
+        $this->rediriger("admin","utilisateurs");
+    }
+
+    public function utilisateurAdministrateur() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurAdministrateur($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Utilisateur upgradé administrateur");
+        $this->rediriger("admin","utilisateurs");
+    }
+
+    public function utilisateurDemote() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurDegrade($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Dégradation utilisateur");
+        $this->rediriger("admin","utilisateurs");
+    }
+
     public function billetCreer()
     {
         $this->needAdminRole();
@@ -198,7 +230,8 @@ class ControleurAdmin extends ControleurSecurise
         $this->genererVueAdmin(array('utilisateurs' => $utilisateurs, 'grade' => $grade));
     }
 
-    public function utilisateurModifier() {
+    public function utilisateurEditer() {
+        $this->genererVue();
 
     }
 
@@ -230,9 +263,9 @@ class ControleurAdmin extends ControleurSecurise
             $this->commentaire->commentaireEditer($contenuCommentaire, $id);
             $this->rediriger("admin","moderation");
         }
-
+        $grade = $this->requete->getSession()->getAttribut("grade");
         $commmentaire = $this->commentaire->getCommentaire($id);
-        $this->genererVueAdmin(array('commentaire' => $commmentaire));
+        $this->genererVueAdmin(array('commentaire' => $commmentaire, 'grade' => $grade));
 
     }
 }

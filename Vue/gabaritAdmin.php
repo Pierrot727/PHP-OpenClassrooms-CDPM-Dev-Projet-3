@@ -34,6 +34,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><a id="lienPass" href="#">Retourner au site</a></li>
                 <li><a id="lienPass" href="admin/modifierMdp">Changer votre mot de passe</a></li>
                 <li><a id="lienDeco" href="connexion/deconnecter">Se déconnecter</a></li>
             </ul>

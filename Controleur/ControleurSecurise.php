@@ -47,5 +47,15 @@ abstract class ControleurSecurise extends Controleur
         }
     }
 
+    public function needUserNotBan()
+    {
+        if ($this->requete->getSession()->existeAttribut("grade") &&
+            $this->requete->getSession()->getAttribut('acces') === 'Autorisé' || $this->requete->getSession()->getAttribut('grade') === 'Moderateur' || $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
+        } else {
+            header('HTTP/1.0 403 Forbidden');
+            $this->rediriger("accueil/forbidden");
+        }
+    }
+
 
 }

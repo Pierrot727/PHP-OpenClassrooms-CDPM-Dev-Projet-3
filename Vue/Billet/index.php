@@ -16,68 +16,66 @@
 
         <h3>Commentaires</h3>
         <div class="left-block">
-            <?php //var_dump($commentaires) ?>
+            <?php if ($this->nettoyer($nbCommentaires) >= 1) { ?>
 
-            <?php foreach ($commentaires as $commentaire): ?>
-                <?php var_dump($commentaires[id]) ?>
-
-                <?php if ($commentaire[id] != null ) { ?>
-            <form method="post" action="commentaire/signaler/<?= $commentaire['id'] ?>">
-                <p>
-                    <input type="hidden" name="id_comment" value="<?= $commentaire['id'] ?>">
-                    <input type="hidden" name="id_episode" value="<?= $commentaire['id'] ?>">
-                    <span class="pseudo">
+                <?php foreach ($commentaires as $commentaire): ?>
+                    <form method="post" action="commentaire/signaler/<?= $commentaire['id'] ?>">
+                        <p>
+                            <input type="hidden" name="id_comment" value="">
+                            <input type="hidden" name="id_episode" value="">
+                            <span class="pseudo">
                             <i class="fa fa-pencil"
                                aria-hidden="true"></i> <?= $this->nettoyer($commentaire['auteur']) ?>
                         </span>
-                    <span class="comment-date">
+                            <span class="comment-date">
                             <?= $this->nettoyer($commentaire['date']) ?>
                         </span>
-                    <span class="comment-signaler">
+                            <span class="comment-signaler">
                             <a href="<?= "commentaire/signaler/" . $this->nettoyer($commentaire['id']) ?>">Signaler le commentaire</a>
                         </span>
-                <p>
+                        <p>
                         <span>
                             <?= $this->nettoyer($commentaire['contenu']) ?>
                         </span>
-                </p>
-                </p>
-            </form>
+                        </p>
+                        </p>
+                    </form>
+                <?php endforeach; ?>
+
             <?php } else { ?>
-            <form method="post" action="">
-                <p>
-                            <span class="pseudo">
                 <p>
                         <span>
                             Il n'y a pas encore de commentaire ...
                         </span>
                 </p>
-                </p>
-            </form>
             <?php } ?>
-            <?php endforeach; ?>
-
-
-
-
         </div>
 
         <h3>Laisser votre commentaire</h3>
         <div class="left-block comment-form">
             <?php if (isset($login)) { ?>
-            <form class="largeur-totale" action="billet/commenter" method="post">
-                <label>Vous êtes identifié, <?= $login ?>, merci pour votre commentaire :<br>
-                    <label>Commentaire</label>
-                    <div>
+                <?php //var_dump($acces)//if ($acces == "Banni") { ?>
+                    <div class="alert alert-danger">
+                        <strong>Impossible!</strong> Vous êtes banni !
+                    </div>
+                <?php //} else { ?>
+                    <form class="largeur-totale" action="billet/commenter" method="post">
+                        <label>Vous êtes identifié, <?= $login ?>, vous pouvez poster, si vous le souhaitez votre
+                            commentaire ci-dessous :</br>
+                        </label>
+                        </br>
+                        <label>Commentaire</label>
+                        <div>
                         <textarea enabled=false rows="8" class="bords-arrondis largeur-totale"
                                   name="contenu"></textarea>
-                    </div>
-                    <p>
-                        <input type="hidden" name="id" value="<?= $billet['id'] ?>">
-                        <input type="submit" class="bords-arrondis" value="Commenter">
-                    </p>
-            </form>
-            <?php } else { ?> <a href="admin/">Vous devez être enregitré pour poster un commentaire, cliquez içi pour
+                        </div>
+                        <p>
+                            <input type="hidden" name="id" value="<?= $billet['id'] ?>">
+                            <input type="submit" class="bords-arrondis" value="Commenter">
+                        </p>
+                    </form>
+                <?php //} ?>
+            <?php  } else { ?> <a href="admin/">Vous devez être enregitré pour poster un commentaire, cliquez içi pour
                 vous identifier</a>
             <?php } ?>
         </div>

@@ -34,12 +34,14 @@ class ControleurBillet extends Controleur
         $billet = $this->billet->getBillet($idBillet);
         $billets = $this->billet->getBilletsTronquesVisible(1, 200);
         $commentaires = $this->commentaire->getCommentaires($idBillet);
+        $nbCommentaires = $this->commentaire->countCommentaires();
 
         if ($this->isAuthentificated()) {
             $login = $this->requete->getSession()->getAttribut("login");
-            $this->genererVue(array('login' => $login, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires ));
+            //$acces = $this->requete->getSession()->getAttribut("acces");
+            $this->genererVue(array('login' => $login,'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires,'nbCommentaires' => $nbCommentaires ));
         } else {
-            $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires ));
+            $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));
         };
     }
     // Ajoute un commentaire sur un billet

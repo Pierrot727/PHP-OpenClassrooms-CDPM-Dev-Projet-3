@@ -44,7 +44,7 @@ $secret = '6LcWfj4UAAAAAEgMUSRlSX8HgYzwTgk6rHkMTrzp'; // votre clé privée
                            placeholder="Retapez votre mot de passe.." class="form-control">
                 </div>
                 <div class="col-sm-6 col-lg-offset-2 form-group">
-                    <div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>">
+                    <div class="g-recaptcha" data-sitekey="<?php //echo $siteKey; ?>">
                     </div>
                 </div>
                 </br>
@@ -57,7 +57,7 @@ $secret = '6LcWfj4UAAAAAEgMUSRlSX8HgYzwTgk6rHkMTrzp'; // votre clé privée
     <script src="https://www.google.com/recaptcha/api.js">
     </script>
 <?php
-$reCaptcha = new ReCaptcha($secret);
+/*$reCaptcha = new ReCaptcha($secret);
 if(isset($_POST["g-recaptcha-response"])) {
     $resp = $reCaptcha->verifyResponse(
         $_SERVER["REMOTE_ADDR"],
@@ -65,7 +65,7 @@ if(isset($_POST["g-recaptcha-response"])) {
     );
     if ($resp != null && $resp->success) {echo "CAPTCHA OK";}
     else {echo "CAPTCHA incorrect";}
-}
+} */
 ?>
 
 <?php if (isset($msgErreur)): ?>

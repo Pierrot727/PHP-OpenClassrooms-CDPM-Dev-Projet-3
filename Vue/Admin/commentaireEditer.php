@@ -1,4 +1,6 @@
-<?php $this->menuActif = "Moderation" ?>
+<?php $this->menuActif = "Moderation";
+$this->grade = $this->nettoyer($grade);
+?>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header"></h1>
     <div class="row placeholders">
@@ -7,7 +9,7 @@
             <h2>Modifier un commentaire existant</h2>
 
 
-            <div class="col-sm-8 contact-form">
+            <div class="col-sm-12 contact-form">
                 <form id="contact" method="post" class="form" role="form">
                     <textarea class="form-control" id="tiny" name="contenuCommentaire" placeholder="Le texte" rows="5"><?= $commentaire['contenu'] ?>
                     </textarea>
