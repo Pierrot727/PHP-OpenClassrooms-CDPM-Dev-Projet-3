@@ -40,15 +40,12 @@ abstract class ControleurSecurise extends Controleur
     public function needModeratorRole()
     {
         if ($this->requete->getSession()->existeAttribut("grade") &&
-            $this->requete->getSession()->getAttribut('grade') === 'Moderateur') {
+            $this->requete->getSession()->getAttribut('grade') === 'Moderateur' || $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
         } else {
             header('HTTP/1.0 403 Forbidden');
             $this->rediriger("accueil/forbidden");
         }
     }
 
-    public function needUserRole () {
-
-    }
 
 }

@@ -46,29 +46,26 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li <?php if (($this->menuActif == "Tableau de bord")) {echo($this->actif);} ?>>
+                    <li <?php if (($this->menuActif == "Tableau de bord")) {
+                        echo($this->actif);
+                    } ?>>
                         <a id="lienDashboard" href="admin/">
-                            <img src="Contenu/images/symbol/dashboard.png" alt="Tableau de bord" title="Tableau de bord"> Tableau de bord
+                            <img src="Contenu/images/symbol/dashboard.png" alt="Tableau de bord"
+                                 title="Tableau de bord"> Tableau de bord
                         </a>
                     </li>
-                    <li <?php if (($this->menuActif == "Administration")) {echo($this->actif);} ?>data-toggle="collapse" data-target="#products" class="collapsed active">
-                        <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration" title="Panneau d'administration">Administration
-                        <i class="fa fa-chevron-down" aria-hidden="true">
-                        </i>
-                    </li>
-                    <ul class="sub-menu collapse" id="products">
-                        <li class="fa fa-chevron-right"><a class="active" href="admin/administration"> Gestion des billets</a></li><br>
-                        <li class="fa fa-chevron-right"><a href=""> Mon histoire</a></li><br>
-                        <li class="fa fa-chevron-right"><a href=""> Mes livres</a></li><br>
-                        <li class="fa fa-chevron-right"><a href=""> Mon adresse</a></li><br>
-                    </ul>
-                    <li <?php if (($this->menuActif == "Administration")) {echo($this->actif);} ?>>
-                        <a id="lienAdministration" href="admin/administration">
-                            <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration"
-                                 title="Panneau d'administration">Administration</a><span
-                                class="sr-only">(current)</span>
-                        </a>
-                    </li>
+                    <?php if ($this->grade == "Administrateur") { ?>
+                        <li <?php if (($this->menuActif == "Administration")) {
+                            echo($this->actif);
+                        } ?>>
+                            <a id="lienAdministration" href="admin/administration">
+                                <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration"
+                                     title="Panneau d'administration">Administration</a><span
+                                    class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if ($this->grade == "Moderateur" || $this->grade == "Administrateur") { ?>
                     <li <?php if (($this->menuActif == "Moderation")) {
                         echo($this->actif);
                     } ?>>
@@ -77,6 +74,8 @@
                                  title="Panneau de modération"> Panneau de modération
                         </a>
                     </li>
+                    <?php } ?>
+                    <?php if ($this->grade == "Administrateur") { ?>
                     <li <?php if (($this->menuActif == "Utilisateurs")) {
                         echo($this->actif);
                     } ?>>
@@ -85,6 +84,7 @@
                                  title="Gestion utilisateur(s)">Utilisateur(s)
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
 

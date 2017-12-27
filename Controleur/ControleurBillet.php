@@ -5,6 +5,7 @@ namespace Blog\Controleur;
 use Blog\Framework\Controleur;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
+use Blog\Modele\Utilisateur;
 
 /**
  * Contrôleur des actions liées aux billets
@@ -34,21 +35,24 @@ class ControleurBillet extends Controleur
         $billets = $this->billet->getBilletsTronquesVisible(1, 200);
         $commentaires = $this->commentaire->getCommentaires($idBillet);
 
-        $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires));
+        if ($this->isAuthentificated()) {
+            $login = $this->requete->getSession()->getAttribut("login");
+            $this->genererVue(array('login' => $login, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires ));
+        } else {
+            $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires ));
+        };
     }
-
     // Ajoute un commentaire sur un billet
     public function commenter()
     {
         $idBillet = $this->requete->getParametre("id");
-        $auteur = $this->requete->getParametre("auteur");
+        if($this->isAuthentificated()){
+        $auteur = $this->requete->getSession()->getAttribut("login");
         $contenu = $this->requete->getParametre("contenu");
-
         $this->commentaire->ajouterCommentaire($auteur, $contenu, $idBillet);
+    }
         // Exécution de l'action par défaut pour réafficher la liste des billets
         $this->executerAction("index");
     }
-
-
 }
 

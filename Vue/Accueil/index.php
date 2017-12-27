@@ -36,12 +36,10 @@
 
 <div class="row pagination">
     <ul>
-
-        <li class="bords-arrondis page-actuelle"><a>1</a></li>
-        <li class="bords-arrondis"><a href="">2</a></li>
-        <li class="bords-arrondis"><a href="">3</a></li>
-        <li class="bords-arrondis"><a href="">4</a></li>
-        <li class="bords-arrondis"><a href="">&gt;</a></li>
+        <?php for ($i = 1; $i <= $nbPages; $i++): ?>
+            <li class="bords-arrondis <?= ($i == $page) ? "page-actuelle" : "" ?>">
+                <a href="accueil/page/<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; ?>
     </ul>
-
 </div>

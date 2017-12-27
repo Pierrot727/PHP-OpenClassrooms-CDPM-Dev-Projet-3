@@ -57,5 +57,12 @@ class ControleurAccueil extends Controleur
         $this->genererVue();
     }
 
+    public function inscription() {
+        if ($this->requete->existeParametre("nom")) {
+            die();
+        }
+        $this->genererVue();
+    }
+
 }
 

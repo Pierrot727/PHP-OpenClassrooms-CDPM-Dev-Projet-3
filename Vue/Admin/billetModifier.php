@@ -1,4 +1,6 @@
-<?php $this->menuActif = "Administration" ?>
+<?php $this->menuActif = "Administration";
+$this->grade = $this->nettoyer($grade);
+?>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header"></h1>
     <div class="row placeholders">
@@ -24,7 +26,7 @@
                         </div>
                         <div class="col-xs-4 col-md-4 form-group">
                             <label>Image</label>
-                            <input class="form-control" id="imageBillet" name="imageBillet"
+                            <input class="form-control" id="imageBillet" name="photoBillet"
                                    placeholder="Entrez le nom exacte de la photo (sans suffixe)" type="text" value="<?= $billet['photo'] ?>"/>
                         </div>
                     </div>

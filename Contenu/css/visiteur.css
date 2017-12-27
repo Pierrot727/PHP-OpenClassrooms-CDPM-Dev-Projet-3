@@ -490,6 +490,34 @@ td.check-cell{
     margin-bottom: 30px;
 }
 
+#login-form {
+    width: 100%;
+}
+
+.inscription-box {
+    background: #eee;
+    padding: 10px;
+    /* min-height: 300px; */
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+
+
+.inscription-box h2, .crud-box h2 {
+    color: #666;
+    font-family: "roboto";
+    font-weight:300;
+}
+
+
+.inscription-box hr {
+    border: none;
+    border-bottom: 1px solid #888;
+    height: 1px;
+    margin-bottom: 30px;
+}
 
 form label, form div {
     color:#666;

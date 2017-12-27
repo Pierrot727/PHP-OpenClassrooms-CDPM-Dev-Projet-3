@@ -14,7 +14,7 @@
                     <br/>
                     <div class="row">
                         <div class="col-xs-12 col-md-12 form-group">
-                            <button class="btn btn-primary pull-right" type="submit">Modifier le billet</button>
+                            <button class="btn btn-primary pull-right" type="submit">Modifier le commentaire</button>
                 </form>
 
 

@@ -1,4 +1,7 @@
-<?php $this->menuActif = "Administration" ?>
+<?php $this->menuActif = "Administration";
+$this->grade = $this->nettoyer($grade);
+?>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header"></h1>
     <div class="row placeholders">
@@ -56,15 +59,12 @@
                                         <img src="Contenu/images/symbol/modifier.png" alt="modifier billet"
                                              title="Cliquez pour modifier le billet selectionné">
                                     </a>
-                                    <a href="#modal-dialog" class="modal-toggle" data-toggle="modal"
-                                       data-href=""
-                                       data-modal-type="confirm" data-modal-title="Effacer un billet"
-                                       data-modal-text="Are you sure you want to delete {$property.address_string}?"
-                                       data-modal-confirm-url="{$base_url}residential-lettings/properties/do-delete/property/{$property.id}">
+                                    <a href="#" class="btn-del-billet"
+                                       data-billet-title="<?= $this->nettoyer($billet['titre']) ?>"
+                                       data-modal-confirm-url="admin/billetSupprimer/<?= $billet['id'] ?>">
                                         <i class="icon-trash"></i>
                                         <img src="Contenu/images/symbol/supprimer.png" alt="supprimer billet"
-                                             title="Cliquez pour supprimer le billet selectionné"
-                                             data-toggle="modal" data-target="#myModal">
+                                             title="Cliquez pour supprimer le billet selectionné">
                                     </a>
 
                                     <?php if ($billet['visible'] == "NON") : ?>
@@ -110,7 +110,7 @@
                             <p>Etes-vous sur de vouloir supprimer le billet concerné ?</p>
                         </div>
                         <div class="modal-footer">
-                            <a href="admin/billetSupprimer/<?= $billet['id'] ?>" id="btnYes" class="btn btn-danger">Oui,
+                            <a href="" id="btnYes" class="btn btn-danger">Oui,
                                 je
                                 confirme</a>
                             <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Non, j'annule</a>
@@ -122,3 +122,14 @@
         </div>
     </div>
 </div>
+<script>
+$(function(){
+    $modal = $('#modal-dialog');
+   $('a.btn-del-billet').on('click',function(e){
+       e.preventDefault();
+       $modal.find('a#btnYes').attr('href',$(this).data('modalConfirmUrl'));
+       $modal.find('.modal-body p').text("Etes vous sur de vouloir supprimer " + $(this).data('billetTitle'));
+       $modal.modal("show");
+   })
+});
+</script>
