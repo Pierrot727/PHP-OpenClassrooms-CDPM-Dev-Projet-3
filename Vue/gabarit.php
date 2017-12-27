@@ -81,7 +81,7 @@
     <div class="copyright">
         <div class="container">
             <p>&copy; 2018 Jean FORTEROCHE - Billet simple pour l'Alaska - Projet n° 3 - Chef de projet Dévellopement -
-                OpenClassRooms - <a href="admin">Administraiton</a></p>
+                OpenClassRooms - <a href="admin">Administration</a></p>
         </div>
     </div>
 

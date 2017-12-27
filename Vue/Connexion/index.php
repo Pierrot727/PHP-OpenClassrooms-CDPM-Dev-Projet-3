@@ -11,6 +11,8 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Entrez votre mot de passe"
                name="mdp" required></br>
+        <a href="accueil/inscription">S'inscrire sur le site</a></br>
+        </br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">S'identifier</button>
     </form>
 

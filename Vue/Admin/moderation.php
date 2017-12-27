@@ -1,4 +1,6 @@
-<?php $this->menuActif = "Moderation" ?>
+<?php $this->menuActif = "Moderation";
+$this->grade = $this->nettoyer($grade)?>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header"></h1>
     <div class="row placeholders">
@@ -33,15 +35,17 @@
                                     <?= ($this->nettoyer($commentaire['signalement']))? "Oui" : "Non" ?>
                                 </th>
                                 <th>
-                                    <a id="lienEditerCommentaire" href="admin/EditerCommentaire/<?= $commentaire['idc'] ?>">
+                                    <a id="lienEditerCommentaire" href="admin/commentaireEditer/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/commentaire-edit.png" alt="modifier billet" title="Editer le commentaire">
                                     </a>
-                                    <a id="lienSupprimerCommentaire" href="admin/supprimerCommentaire/<?= $commentaire['idc'] ?>">
+                                    <a id="lienSupprimerCommentaire" href="admin/commentaireSupprimer/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/commentaire-sup.png" alt="supprimer commentaire" title="Suprimer le commentaire">
                                     </a>
+                                    <?php if ($commentaire['signalement'] > 0) : ?>
                                     <a id="lienSupprimerSignalement" href="admin/supprimerSignalement/<?= $commentaire['idc'] ?>">
                                         <img src="Contenu/images/symbol/signalement-sup.png" alt="supprimer signalement" title="Supprimer le/les signalements">
                                     </a>
+                                    <?php endif; ?>
                                 </th>
                             </tr>
                         <?php endforeach; ?>

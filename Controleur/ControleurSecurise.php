@@ -29,29 +29,23 @@ abstract class ControleurSecurise extends Controleur
 
     public function needAdminRole()
     {
-        // verifier si user connecté à la role ADMIN
-        // si non
-        // HEADER HTTP403
         if ($this->requete->getSession()->existeAttribut("grade") &&
             $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
         } else {
             header('HTTP/1.0 403 Forbidden');
             $this->rediriger("accueil/forbidden");
         }
-
     }
 
     public function needModeratorRole()
     {
-        // verifier si user connecté à la role ADMIN
-        // si non
-        // HEADER HTTP403
-        $this->rediriger("connexion");
-
+        if ($this->requete->getSession()->existeAttribut("grade") &&
+            $this->requete->getSession()->getAttribut('grade') === 'Moderateur' || $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
+        } else {
+            header('HTTP/1.0 403 Forbidden');
+            $this->rediriger("accueil/forbidden");
+        }
     }
 
-    public function needUserRole () {
-
-    }
 
 }

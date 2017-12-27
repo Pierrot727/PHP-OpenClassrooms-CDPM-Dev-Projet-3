@@ -22,12 +22,15 @@ class ControleurAccueil extends Controleur
     {
         $page = 1;
         $billets = $this->billet->getBilletsTronquesVisible($page, 200);
-
         $nbPages = $this->billet->getNombrePages();
-        $this->genererVue(array('billets' => $billets,
-            'page' => $page,
-            'nbPages' => $nbPages
-        ));
+        if (isset($_COOKIE['no_splash'])) {
+            $this->genererVue(array('billets' => $billets,
+                'page' => $page,
+                'nbPages' => $nbPages
+            ));
+        } else {
+            $this->rediriger('accueil','splash');
+        }
     }
 
 
@@ -35,7 +38,6 @@ class ControleurAccueil extends Controleur
     {
         $page = $this->requete->getParametre("id");
         $billets = $this->billet->getBilletsTronquesVisible($page, 200);
-        var_dump($billets->fetchAll());
         $nbPages = $this->billet->getNombrePages();
         $this->genererVue(array('billets' => $billets,
             'page' => $page,
@@ -43,9 +45,24 @@ class ControleurAccueil extends Controleur
         ), 'index');
     }
 
-public function forbidden() {
+    public function splash()
+    {
+        $expire = time() + 60 * 60 * 24;                    // Cookie expire dans 1 jour - 60 seconds * 60 minutes * 24 hours
+        setcookie("no_splash", "1", $expire,'/');  // Paramatréage du cookie : setcookie(cookie_name, cookie_value, expiry_time)
         $this->genererVue();
-}
+    }
+
+    public function forbidden()
+    {
+        $this->genererVue();
+    }
+
+    public function inscription() {
+        if ($this->requete->existeParametre("nom")) {
+            die();
+        }
+        $this->genererVue();
+    }
 
 }
 

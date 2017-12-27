@@ -1,5 +1,8 @@
-<?php $this->menuActif = "Tableau de bord" ?>
-<?php $this->titre = "Mon Blog - Modification de mot de passe" ?>
+<?php
+$this->menuActif = "Tableau de bord";
+$this->titre = "Mon Blog - Modification de mot de passe";
+$this->grade = $this->nettoyer($grade) ;
+?>
     <p>Changer votre mot de passe actuel</p>
 
     <form action="" method="post">

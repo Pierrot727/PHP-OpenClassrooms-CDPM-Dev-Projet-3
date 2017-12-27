@@ -92,6 +92,12 @@ abstract class Controleur
         $this->requete->getSession()->setMessageFlash($type, $message);
     }
 
+
+
+    protected function isAuthentificated(){
+        return $this->requete->getSession()->existeAttribut("login");
+    }
+
     /**
      * Effectue une redirection vers un contrôleur et une action spécifiques
      *

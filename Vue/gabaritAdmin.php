@@ -12,6 +12,7 @@
     <base href="<?= $racineWeb ?>">
     <link rel="stylesheet" href="Contenu/css/bootstrap.min.css">
     <link rel="stylesheet" href="Contenu/css/administration.css"/>
+    <link rel="stylesheet" href="Contenu/css/font-awesome.css">
     <script src="Contenu/js/jquery.js"></script>
     <script src="Contenu/js/bootstrap.min.js"></script>
     <script src='Contenu/js/tinymce/tinymce.min.js'></script>
@@ -45,26 +46,45 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li <?php if (($this->menuActif == "Tableau de bord")) { echo ($this->actif);} ?>>
+                    <li <?php if (($this->menuActif == "Tableau de bord")) {
+                        echo($this->actif);
+                    } ?>>
                         <a id="lienDashboard" href="admin/">
-                            <img src="Contenu/images/symbol/dashboard.png" alt="Tableau de bord" title="Tableau de bord"> Tableau de bord
+                            <img src="Contenu/images/symbol/dashboard.png" alt="Tableau de bord"
+                                 title="Tableau de bord"> Tableau de bord
                         </a>
                     </li>
-                    <li <?php if (($this->menuActif == "Administration")) { echo ($this->actif);} ?>>
-                        <a id="lienAdministration" href="admin/administration">
-                            <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration" title="Panneau d'administration">Administration</a><span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li <?php if (($this->menuActif == "Moderation")) { echo ($this->actif);} ?>>
+                    <?php if ($this->grade == "Administrateur") { ?>
+                        <li <?php if (($this->menuActif == "Administration")) {
+                            echo($this->actif);
+                        } ?>>
+                            <a id="lienAdministration" href="admin/administration">
+                                <img src="Contenu/images/symbol/admin.png" alt="Panneau d'administration"
+                                     title="Panneau d'administration">Administration</a><span
+                                    class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if ($this->grade == "Moderateur" || $this->grade == "Administrateur") { ?>
+                    <li <?php if (($this->menuActif == "Moderation")) {
+                        echo($this->actif);
+                    } ?>>
                         <a id="lienModeration" href="admin/moderation">
-                            <img src="Contenu/images/symbol/moderer.png" alt="Panneau de modération" title="Panneau de modération"> Panneau de modération
+                            <img src="Contenu/images/symbol/moderer.png" alt="Panneau de modération"
+                                 title="Panneau de modération"> Panneau de modération
                         </a>
                     </li>
-                    <li <?php if (($this->menuActif == "Utilisateurs")) { echo ($this->actif);} ?>>
+                    <?php } ?>
+                    <?php if ($this->grade == "Administrateur") { ?>
+                    <li <?php if (($this->menuActif == "Utilisateurs")) {
+                        echo($this->actif);
+                    } ?>>
                         <a id="lienUtilisateurs" href="admin/utilisateurs">
-                            <img src="Contenu/images/symbol/user.png" alt="Panneau de gestion utilisateur" title="Gestion utilisateur(s)">Utilisateur(s)
+                            <img src="Contenu/images/symbol/user.png" alt="Panneau de gestion utilisateur"
+                                 title="Gestion utilisateur(s)">Utilisateur(s)
                         </a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
 
@@ -73,16 +93,16 @@
 
         <div class="row">
 
-            <?php if ($flash =! "1" ): ?>
+            <?php if ($flash = !"1"): ?>
                 <div class="alert alert-success">
                     <p><strong>Succes !</strong> <?= $flash ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if (isset($msgErreur)): ?>
-            <div class="alert alert-danger">
-                <p><strong>Attention !</strong> <?= $msgErreur ?></p>
-            </div>
+                <div class="alert alert-danger">
+                    <p><strong>Attention !</strong> <?= $msgErreur ?></p>
+                </div>
             <?php endif; ?>
         </div>
     </div>
