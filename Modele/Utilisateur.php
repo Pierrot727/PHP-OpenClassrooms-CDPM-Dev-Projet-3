@@ -47,7 +47,7 @@ class Utilisateur extends Modele
      */
     public function getUtilisateur($login)
     {
-        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade ,UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_ACCESS AS acces FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
+        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade ,UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_ACCES AS acces FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
         $utilisateur = $this->executerRequete($sql, array('login' => $login));
         if ($utilisateur->rowCount() == 1)
             return $utilisateur->fetch(); // Accès à la première ligne de résultat
@@ -57,7 +57,7 @@ class Utilisateur extends Modele
 
     public function getUtilisateurs()
     {
-        $sql = "SELECT UTIL_ID AS id, UTIL_LOGIN AS login, UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_GRADE AS grade, UTIL_ACCESS AS acces  FROM `t_utilisateur`";
+        $sql = "SELECT UTIL_ID AS id, UTIL_LOGIN AS login, UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_GRADE AS grade, UTIL_ACCES AS acces  FROM `t_utilisateur`";
         $utilisateurs = $this->executerRequete($sql, array());
         return $utilisateurs;
     }

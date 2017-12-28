@@ -1131,7 +1131,14 @@
       <DefaultExpression>&apos;Utilisateur&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="270" parent="237" name="PRIMARY">
+    <column id="270" parent="237" name="UTIL_ACCES">
+      <Position>9</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;Autorise&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="271" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UTIL_ID</ColNames>
       <Primary>1</Primary>

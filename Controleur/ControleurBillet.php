@@ -44,6 +44,7 @@ class ControleurBillet extends Controleur
             $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));
         };
     }
+
     // Ajoute un commentaire sur un billet
     public function commenter()
     {

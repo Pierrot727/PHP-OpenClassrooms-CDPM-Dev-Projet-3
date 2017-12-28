@@ -60,8 +60,8 @@ class ControleurAdmin extends ControleurSecurise
             }
 
         }
-
-        $this->genererVueAdmin($param);
+        $grade = $this->requete->getSession()->getAttribut("grade");
+        $this->genererVueAdmin(array($param,'grade' => $grade));
     }
 
     public function inscription()
