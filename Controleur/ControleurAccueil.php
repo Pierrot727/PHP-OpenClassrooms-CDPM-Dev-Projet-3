@@ -16,6 +16,7 @@ class ControleurAccueil extends Controleur
     {
         $this->billet = new Billet();
         $this->commentaire = new Commentaire();
+        $this->utilisateur= new Utilisateur();
     }
 
     // Affiche la liste de tous les billets du blog
