@@ -140,7 +140,7 @@ class Billet extends Modele
 
     public function billetSupprimer($idBillet)
     {
-        $sql = 'DELETE FROM `t_billet` WHERE BIL_ID = :numeroBillet';
+        $sql = 'DELETE FROM T_BILLET WHERE BIL_ID = :numeroBillet';
 
         return $this->executerRequete($sql, array(
                 'numeroBillet' => $idBillet,
@@ -149,7 +149,7 @@ class Billet extends Modele
 
     public function billetsSupprimer($idBillets)
     {
-        $sql = 'DELETE FROM `t_billet` WHERE BIL_ID IN (:numeroBillets)';
+        $sql = 'DELETE FROM T_BILLET WHERE BIL_ID IN (:numeroBillets)';
 
 
         return $this->executerRequete($sql, array(

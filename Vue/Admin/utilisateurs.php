@@ -16,7 +16,8 @@ $this->grade = $this->nettoyer($grade);
                 <h2 class="sub-header">Liste des utilisateurs</h2>
                 <div class="table-responsive">
                     <a id="lienIns" href="admin/inscription">
-                        <img src="Contenu/images/symbol/user-new.png" alt="Ajouter un nouvel utilisateur" title="Ajouter un nouvel utilisateur"> Ajouter un nouvel utilisateur</a>
+                        <img src="Contenu/images/symbol/user-new.png" alt="Ajouter un nouvel utilisateur"
+                             title="Ajouter un nouvel utilisateur"> Ajouter un nouvel utilisateur</a>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -43,29 +44,47 @@ $this->grade = $this->nettoyer($grade);
                                 <th><?= $this->nettoyer($utilisateur['email']) ?></th>
                                 <th><?= $this->nettoyer($utilisateur['grade']) ?></th>
                                 <th><?= $this->nettoyer($utilisateur['acces']) ?></th>
-                                <th><a id="lienEditerUtilisateur" href="admin/utilisateurEditer/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-edit.png" alt="Editer utilisateur" title="Editer l'utilisateur">
+                                <th><a id="lienEditerUtilisateur"
+                                       href="admin/utilisateurEditer/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                        <img src="Contenu/images/symbol/user-edit.png" alt="Editer utilisateur"
+                                             title="Editer l'utilisateur">
                                     </a>
-                                    <a id="lienSupprimerUtilisateur" href="admin/utilisateurSupprimer/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-supr.png" alt="Supprimer utilisateur" title="Supprimer l'utilisateur">
+                                    <?php if ($this->nettoyer($utilisateur['grade']) == "Administrateur" || $this->nettoyer($utilisateur['grade']) == "Moderateur") {
+                                    } else { ?>
+                                        <a id="lienSupprimerUtilisateur"
+                                           href="admin/utilisateurSupprimer/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                            <img src="Contenu/images/symbol/user-supr.png" alt="Supprimer utilisateur"
+                                                 title="Supprimer l'utilisateur">
+                                        </a>
+                                        <a id="lienDebanirUtilisateur"
+                                           href="admin/utilisateurDeBannir/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                            <img src="Contenu/images/symbol/user-unban.png" alt="Débanir l'utilisateur"
+                                                 title="Débanir l'utilisateur">
+                                        </a>
+                                        <a id="lienBanirUtilisateur"
+                                           href="admin/utilisateurBannir/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                            <img src="Contenu/images/symbol/user-ban.png" alt="Banir l'utilisateur"
+                                                 title="Banir l'utilisateur">
+                                        </a>
+                                    <?php } ?>
+                                </th>
+                                <th><a id="lienBanirUtilisateur"
+                                       href="admin/utilisateurDemote/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                        <img src="Contenu/images/symbol/user-demote.png"
+                                             alt="Enlever les droits de moderation/administration"
+                                             title="Enlever les droits de moderation/administration">
                                     </a>
-                                    <a id="lienDebanirUtilisateur" href="admin/utilisateurUnban/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-unban.png" alt="Débanir l'utilisateur" title="Débanir l'utilisateur">
+                                    <a id="lienPromoteModo"
+                                       href="admin/utilisateurModerateur/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                        <img src="Contenu/images/symbol/user-modo.png" alt="Promouvoir modérateur"
+                                             title="Promouvoir modérateur">
                                     </a>
-                                    <a id="lienBanirUtilisateur" href="admin/utilisateurBan/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-ban.png" alt="Banir l'utilisateur" title="Banir l'utilisateur">
+                                    <a id="lienBanirUtilisateur"
+                                       href="admin/utilisateurAdministrateur/<?= $this->nettoyer($utilisateur['id']) ?>">
+                                        <img src="Contenu/images/symbol/user-admin.png" alt="Promouvoir administrateur"
+                                             title="Promouvoir administrateur">
                                     </a>
                                 </th>
-                                <th><a id="lienBanirUtilisateur" href="admin/utilisateurDemote/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-demote.png" alt="Enlever les droits de moderation/administration" title="Enlever les droits de moderation/administration">
-                                    </a>
-                                    <a id="lienPromoteModo" href="admin/utilisateurModerateur/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-modo.png" alt="Promouvoir modérateur" title="Promouvoir modérateur">
-                                    </a>
-                                    <a id="lienBanirUtilisateur" href="admin/utilisateurAdministrateur/<?= $this->nettoyer($utilisateur['id']) ?>">
-                                        <img src="Contenu/images/symbol/user-admin.png" alt="Promouvoir administrateur" title="Promouvoir administrateur">
-                                    </a>
-                                    </th>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

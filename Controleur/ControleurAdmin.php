@@ -121,6 +121,22 @@ class ControleurAdmin extends ControleurSecurise
         $this->rediriger("admin","utilisateurs");
     }
 
+    public function utilisateurBannir() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurBannir($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Utilisateur banni !");
+        $this->rediriger("admin","utilisateurs");
+    }
+
+    public function utilisateurDeBannir() {
+        $this->needAdminRole();
+        $id = $this->requete->getParametre('id');
+        $this->utilisateur->utilisateurDeBannir($id);
+        $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Utilisateur debanni !");
+        $this->rediriger("admin","utilisateurs");
+    }
+
     public function billetCreer()
     {
         $this->needAdminRole();

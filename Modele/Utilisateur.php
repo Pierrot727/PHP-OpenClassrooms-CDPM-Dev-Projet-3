@@ -57,7 +57,7 @@ class Utilisateur extends Modele
 
     public function getUtilisateurs()
     {
-        $sql = "SELECT UTIL_ID AS id, UTIL_LOGIN AS login, UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_GRADE AS grade, UTIL_ACCES AS acces  FROM `t_utilisateur`";
+        $sql = "SELECT UTIL_ID AS id, UTIL_LOGIN AS login, UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_GRADE AS grade, UTIL_ACCES AS acces  FROM T_UTILISATEUR";
         $utilisateurs = $this->executerRequete($sql, array());
         return $utilisateurs;
     }
@@ -121,7 +121,7 @@ class Utilisateur extends Modele
     }
 
     public function utilisateurSupprimer($id) {
-        $sql = 'DELETE FROM `t_utilisateur` WHERE UTIL_ID = :utilId';
+        $sql = 'DELETE FROM T_UTILISATEUR WHERE UTIL_ID = :utilId';
 
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
@@ -129,26 +129,39 @@ class Utilisateur extends Modele
     }
 
     public function utilisateurModerateur($id) {
-        $sql = 'UPDATE t_utilisateur SET UTIL_GRADE="Moderateur" WHERE UTIL_ID= :utilId';
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Moderateur" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
             ))->rowCount() == 1;
     }
 
     public function utilisateurAdministrateur($id) {
-        $sql = 'UPDATE t_utilisateur SET UTIL_GRADE="Administrateur" WHERE UTIL_ID= :utilId';
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Administrateur" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
             ))->rowCount() == 1;
     }
 
     public function utilisateurDegrade($id) {
-    $sql = 'UPDATE t_utilisateur SET UTIL_GRADE="Utilisateur" WHERE UTIL_ID= :utilId';
+    $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Utilisateur" WHERE UTIL_ID= :utilId';
     return $this->executerRequete($sql, array(
             'utilId' => $id,
         ))->rowCount() == 1;
-}
+    }
 
+    public function utilisateurBannir($id) {
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_ACCES="Banni" WHERE UTIL_ID= :utilId';
+        return $this->executerRequete($sql, array(
+                'utilId' => $id,
+            ))->rowCount() == 1;
+    }
+
+    public function utilisateurDeBannir($id) {
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_ACCES="Autorise" WHERE UTIL_ID= :utilId';
+        return $this->executerRequete($sql, array(
+                'utilId' => $id,
+            ))->rowCount() == 1;
+    }
 //    /*
 //     *
 //     */

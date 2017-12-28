@@ -25,9 +25,9 @@ $secret = '6LcWfj4UAAAAAEgMUSRlSX8HgYzwTgk6rHkMTrzp'; // votre clé privée
             </div>
 
             <div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
-            <p>
-                <button class="bords-arrondis" type="submit">Envoyer</button>
-            </p>
+            <div class="col-sm-6 col-lg-offset-4 form-group">
+                <input type="submit" class="bords-arrondis" value="Envoyer">
+            </div>
         </form>
     </div>
 </div>

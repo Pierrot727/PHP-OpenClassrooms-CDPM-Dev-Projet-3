@@ -16,7 +16,7 @@ class ControleurAccueil extends Controleur
     {
         $this->billet = new Billet();
         $this->commentaire = new Commentaire();
-        $this->utilisateur= new Utilisateur();
+        $this->utilisateur = new Utilisateur();
     }
 
     // Affiche la liste de tous les billets du blog
@@ -73,6 +73,7 @@ class ControleurAccueil extends Controleur
 
                 if ($mdp === $verifMdp) {
                     $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
+
                     $this->rediriger("admin");
                 } else {
                     $param['msgErreur'] = 'Mot de passe non identique';

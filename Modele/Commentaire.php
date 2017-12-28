@@ -25,7 +25,7 @@ class Commentaire extends Modele
 
     public function getCommentairesTronques()
     {
-        $sql = 'SELECT t_billet.BIL_ID AS id, t_billet.BIL_TITRE AS titre, t_commentaire.COM_ID AS idc, t_commentaire.COM_CONTENU AS contenu, t_commentaire.COM_SIGNALEMENT AS signalement FROM t_commentaire, t_billet WHERE t_billet.BIL_ID = t_commentaire.BIL_ID';
+        $sql = 'SELECT T_BILLET.BIL_ID AS id, T_BILLET.BIL_TITRE AS titre, T_COMMENTAIRE.COM_ID AS idc, T_COMMENTAIRE.COM_CONTENU AS contenu, T_COMMENTAIRE.COM_SIGNALEMENT AS signalement FROM T_COMMENTAIRE, T_BILLET WHERE T_BILLET.BIL_ID = T_COMMENTAIRE.BIL_ID';
         $CommentairesTronques = $this->executerRequete($sql, array());
 
         return $CommentairesTronques->fetchall();
@@ -62,7 +62,7 @@ class Commentaire extends Modele
     }
 
     public function commentaireSupprimer($idCommentaire){
-        $sql = 'DELETE FROM `t_commentaire` WHERE COM_ID = :idCommentaire';
+        $sql = 'DELETE FROM T_COMMENTAIRE WHERE COM_ID = :idCommentaire';
 
         return $this->executerRequete($sql, array(
                 'idCommentaire' => $idCommentaire,
