@@ -86,8 +86,12 @@ class ControleurAdmin extends ControleurSecurise
                 $param['msgErreur'] = 'Mot de passe non identique';
             }
         }
-        $this->genererVueAdmin($param);
+
+        $grade = $this->requete->getSession()->getAttribut("grade");
+        $this->genererVueAdmin(array($param, 'grade' => $grade));
     }
+
+
 
     public function utilisateurSupprimer() {
         $this->needAdminRole();
@@ -165,9 +169,6 @@ class ControleurAdmin extends ControleurSecurise
         switch ($this->requete->getParametre('form_action')) {
             case 'supprimer':
                 $this->billet->billetSupprimer($ids);
-                break;
-            case "archiver":
-                $this->billet->archiverBillets($ids);
                 break;
             default:
         }
@@ -247,7 +248,29 @@ class ControleurAdmin extends ControleurSecurise
     }
 
     public function utilisateurEditer() {
-        $this->genererVue();
+        $this->needAdminRole();
+        $param = array();
+        if ($this->requete->existeParametre("pseudo") && $this->requete->existeParametre("nom") && $this->requete->existeParametre("prenom")
+            && $this->requete->existeParametre("dateNaissance") && $this->requete->existeParametre("email") && $this->requete->existeParametre("mdp")
+            && $this->requete->existeParametre("verif_mdp")) {
+            $mdp = $this->requete->getParametre('mdp');
+            $verifMdp = $this->requete->getParametre('verif_mdp');
+            $pseudo = $this->requete->getParametre('pseudo');
+            $nom = $this->requete->getParametre('nom');
+            $prenom = $this->requete->getParametre('prenom');
+            $dateNaissance = $this->requete->getParametre('dateNaissance');
+            $email = $this->requete->getParametre('email');
+
+            if ($mdp === $verifMdp) {
+                $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
+                $this->rediriger("admin/utilisateurs");
+            } else {
+                $param['msgErreur'] = 'Mot de passe non identique';
+            }
+        }
+
+        $grade = $this->requete->getSession()->getAttribut("grade");
+        $this->genererVueAdmin(array($param, 'grade' => $grade));
 
     }
 

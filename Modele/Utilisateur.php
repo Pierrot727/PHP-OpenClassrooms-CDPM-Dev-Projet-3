@@ -106,7 +106,8 @@ class Utilisateur extends Modele
 
     }
 
-    public function utilisateurModifier($mdp, $nom, $prenom, $dateNaissance, $email) {
+    public function utilisateurModifier($mdp, $nom, $prenom, $dateNaissance, $email)
+    {
         $pass_hache = password_hash($mdp, PASSWORD_BCRYPT);
         $email_verifie = $email;
         $sql = 'UPDATE T_UTILISATEUR SET UTIL_MDP= :mdp, UTIL_NOM= :nom, UTIL_PRENOM= :prenom, UTIL_DNAISSANCE= :dateNaissance, UTIL_EMAIL= :email';
@@ -120,7 +121,8 @@ class Utilisateur extends Modele
 
     }
 
-    public function utilisateurSupprimer($id) {
+    public function utilisateurSupprimer($id)
+    {
         $sql = 'DELETE FROM T_UTILISATEUR WHERE UTIL_ID = :utilId';
 
         return $this->executerRequete($sql, array(
@@ -128,35 +130,78 @@ class Utilisateur extends Modele
             ))->rowCount() == 1;
     }
 
-    public function utilisateurModerateur($id) {
+    public function existanceUtilisateur($login, $nom, $prenom, $email)
+    {
+        $sql = "SELECT UTIL_LOGIN AS login, UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_EMAIL AS email FROM T_UTILISATEUR
+ WHERE lower(UTIL_EMAIL) = :email OR LOWER(UTIL_LOGIN) = :login  OR (LOWER(UTIL_NOM) = :nom AND LOWER(UTIL_PRENOM) = :prenom)";
+        $utilisateurs = $this->executerRequete($sql, array(
+            'login' => $login,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email
+        ));
+        foreach ($utilisateurs as $utilisateur) {
+            if (strtolower($utilisateur['login']) == strtolower($login)) {
+                return $resultat = "Login existant";
+            }
+            if (strtolower($utilisateur['nom']) == strtolower($nom) && strtolower($utilisateur['prenom']) == strtolower($prenom)) {
+                return $resultat = "Nom et prenom déja existant";
+            }
+
+            if (strtolower($utilisateur['email']) == strtolower($email)) {
+                return $resultat = "Email déja existant";
+            }
+
+        }
+        return false;
+    }
+
+    public function existanceEmailUtilisateur($email)
+    {
+        $sql = "SELECT UTIL_EMAIL AS email  FROM T_UTILISATEUR";
+        $utilisateurs = $this->executerRequete($sql, array());
+        foreach ($utilisateurs as $utilisateur) {
+            if (strtolower($utilisateur['email']) == strtolower($email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function utilisateurModerateur($id)
+    {
         $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Moderateur" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
             ))->rowCount() == 1;
     }
 
-    public function utilisateurAdministrateur($id) {
+    public function utilisateurAdministrateur($id)
+    {
         $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Administrateur" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
             ))->rowCount() == 1;
     }
 
-    public function utilisateurDegrade($id) {
-    $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Utilisateur" WHERE UTIL_ID= :utilId';
-    return $this->executerRequete($sql, array(
-            'utilId' => $id,
-        ))->rowCount() == 1;
+    public function utilisateurDegrade($id)
+    {
+        $sql = 'UPDATE T_UTILISATEUR SET UTIL_GRADE="Utilisateur" WHERE UTIL_ID= :utilId';
+        return $this->executerRequete($sql, array(
+                'utilId' => $id,
+            ))->rowCount() == 1;
     }
 
-    public function utilisateurBannir($id) {
+    public function utilisateurBannir($id)
+    {
         $sql = 'UPDATE T_UTILISATEUR SET UTIL_ACCES="Banni" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,
             ))->rowCount() == 1;
     }
 
-    public function utilisateurDeBannir($id) {
+    public function utilisateurDeBannir($id)
+    {
         $sql = 'UPDATE T_UTILISATEUR SET UTIL_ACCES="Autorise" WHERE UTIL_ID= :utilId';
         return $this->executerRequete($sql, array(
                 'utilId' => $id,

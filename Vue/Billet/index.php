@@ -54,11 +54,11 @@
         <h3>Laisser votre commentaire</h3>
         <div class="left-block comment-form">
             <?php if (isset($login)) { ?>
-                <?php //var_dump($acces)//if ($acces == "Banni") { ?>
+                <?php if ($acces == "Banni") { ?>
                     <div class="alert alert-danger">
                         <strong>Impossible!</strong> Vous êtes banni !
                     </div>
-                <?php //} else { ?>
+                <?php } else { ?>
                     <form class="largeur-totale" action="billet/commenter" method="post">
                         <label>Vous êtes identifié, <?= $login ?>, vous pouvez poster, si vous le souhaitez votre
                             commentaire ci-dessous :</br>
@@ -74,7 +74,7 @@
                             <input type="submit" class="bords-arrondis" value="Commenter">
                         </p>
                     </form>
-                <?php //} ?>
+                <?php } ?>
             <?php  } else { ?> <a href="admin/">Vous devez être enregitré pour poster un commentaire, cliquez içi pour
                 vous identifier</a>
             <?php } ?>

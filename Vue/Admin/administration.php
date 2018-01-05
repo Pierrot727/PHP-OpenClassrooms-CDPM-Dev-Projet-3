@@ -88,14 +88,18 @@ $this->grade = $this->nettoyer($grade);
                             <select name="form_action">
                                 <option value="">Choisissez une action groupée</option>
                                 <option value="supprimer">Supprimer</option>
-                                <option value="archiver">Masquer publications</option>
                             </select>
 
                             <button type="submit" name="action_valider">Valider</button>
                         </div>
                 </div>
-
             </form>
+
+            <?php if (isset($msgErreur)): ?>
+                <div class="alert alert-danger">
+                    <p><strong>Attention !</strong> <?= $msgErreur ?></p>
+                </div>
+            <?php endif; ?>
 
 
             <!-- Modal de confirmation de suppression-->

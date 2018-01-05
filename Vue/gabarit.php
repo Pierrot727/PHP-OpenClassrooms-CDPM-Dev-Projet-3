@@ -42,6 +42,11 @@
 </header>
 
 <div class="container">
+    <?php if (!empty($flash)): ?>
+        <div class="alert alert-<?= $flash['type'] ?>">
+            <p><strong><?= ucfirst($flash['type']) ?> !</strong> <?= $flash['message'] ?></p>
+        </div>
+    <?php endif; ?>
     <?= $contenu ?>
 </div>
 

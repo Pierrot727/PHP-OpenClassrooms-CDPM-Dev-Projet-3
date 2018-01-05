@@ -2,7 +2,11 @@
 $this->menuActif = "Tableau de bord";
 $this->grade = $this->nettoyer($grade);
 ?>
-
+<pre>
+    <?php
+    var_dump($_FILES);
+    ?>
+</pre>
 
 <div class="container">
     <div class="row">
@@ -33,10 +37,11 @@ $this->grade = $this->nettoyer($grade);
                                 <div align="center"><img alt="User Pic"
                                                          src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
                                                          id="profile-image1" class="img-circle img-responsive">
-
-                                    <input id="profile-image-upload" class="hidden" type="file">
+<form action="" method="post" id="profile-form-upload" class="hidden" enctype="multipart/form-data" >
+                                    <input name="file" id="profile-image-upload" type="file">                                    <!--Upload Image Js And Css-->
+</form>
                                     <div style="color:#999;">Cliquez içi pour changer l'image de profil</div>
-                                    <!--Upload Image Js And Css-->
+
 
 
                                 </div>
@@ -48,6 +53,14 @@ $this->grade = $this->nettoyer($grade);
                             <div class="col-sm-6">
                                 <h4 style="color:#00b1b1;"><?= $this->nettoyer($utilisateur['prenom']) ?> <?= $this->nettoyer($utilisateur['nom']) ?></h4></span>
                                 <span><p><?= $this->nettoyer($utilisateur['grade']) ?></p></span>
+                                <?php if ($this->nettoyer($utilisateur['acces'] == "Banni")) { ?>
+                                <span></br>
+                                    </br>
+                                    <div class="alert alert-danger">
+                                        <strong>Attention !</strong> Vous êtes banni, contactez un administrateur !
+                                    </div>
+                                    </p></span>
+                                <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                             <hr style="margin:5px 0 5px 0;">
@@ -89,6 +102,10 @@ $this->grade = $this->nettoyer($grade);
                 $('#profile-image1').on('click', function () {
                     $('#profile-image-upload').click();
                 });
+                $('#profile-image-upload').on('change',function () {
+                    console.log("jiojo");
+                    $('#profile-form-upload').submit();
+                })
             });
         </script>
     </div>

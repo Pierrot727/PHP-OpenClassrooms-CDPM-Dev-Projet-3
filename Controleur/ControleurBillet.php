@@ -34,11 +34,11 @@ class ControleurBillet extends Controleur
         $billet = $this->billet->getBillet($idBillet);
         $billets = $this->billet->getBilletsTronquesVisible(1, 200);
         $commentaires = $this->commentaire->getCommentaires($idBillet);
-        $nbCommentaires = $this->commentaire->countCommentaires();
+        $nbCommentaires = $this->commentaire->countCommentaire($idBillet);
 
         if ($this->isAuthentificated()) {
             $login = $this->requete->getSession()->getAttribut("login");
-            //$acces = $this->requete->getSession()->getAttribut("acces");
+            $acces = $this->requete->getSession()->getAttribut("acces");
             $this->genererVue(array('login' => $login,'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires,'nbCommentaires' => $nbCommentaires ));
         } else {
             $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));

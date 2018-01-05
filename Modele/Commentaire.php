@@ -44,7 +44,13 @@ class Commentaire extends Modele
     public function countCommentaires()
     {
         $sql = 'SELECT COUNT(COM_ID) AS cpt FROM T_COMMENTAIRE';
-        $nombreCommentairesPerBillet = $this->executerRequete($sql)->fetch();
+        $nombreCommentaire = $this->executerRequete($sql)->fetch();
+        return $nombreCommentaire['cpt'];
+    }
+
+    public function countCommentaire($idBillet) {
+        $sql = 'SELECT COUNT(COM_ID) AS cpt FROM T_COMMENTAIRE WHERE BIL_ID = :idBillet';
+        $nombreCommentairesPerBillet = $this->executerRequete($sql, array('idBillet' => $idBillet))->fetch();
         return $nombreCommentairesPerBillet['cpt'];
     }
 

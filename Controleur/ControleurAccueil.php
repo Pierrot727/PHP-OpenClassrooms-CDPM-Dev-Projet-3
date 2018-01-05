@@ -3,6 +3,7 @@
 namespace Blog\Controleur;
 
 use Blog\Framework\Controleur;
+use Blog\Framework\Session;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
 use Blog\Modele\Utilisateur;
@@ -31,7 +32,7 @@ class ControleurAccueil extends Controleur
                 'nbPages' => $nbPages
             ));
         } else {
-            $this->rediriger('accueil','splash');
+            $this->rediriger('accueil', 'splash');
         }
     }
 
@@ -50,7 +51,7 @@ class ControleurAccueil extends Controleur
     public function splash()
     {
         $expire = time() + 60 * 60 * 24;                    // Cookie expire dans 1 jour - 60 seconds * 60 minutes * 24 hours
-        setcookie("no_splash", "1", $expire,'/');  // Paramatréage du cookie : setcookie(cookie_name, cookie_value, expiry_time)
+        setcookie("no_splash", "1", $expire, '/');  // Paramatréage du cookie : setcookie(cookie_name, cookie_value, expiry_time)
         $this->genererVue();
     }
 
@@ -59,26 +60,33 @@ class ControleurAccueil extends Controleur
         $this->genererVue();
     }
 
-    public function inscription() {
-            if ($this->requete->existeParametre("pseudo") && $this->requete->existeParametre("nom") && $this->requete->existeParametre("prenom")
-                && $this->requete->existeParametre("dateNaissance") && $this->requete->existeParametre("email") && $this->requete->existeParametre("mdp")
-                && $this->requete->existeParametre("verif_mdp")) {
-                $mdp = $this->requete->getParametre('mdp');
-                $verifMdp = $this->requete->getParametre('verif_mdp');
-                $pseudo = $this->requete->getParametre('pseudo');
-                $nom = $this->requete->getParametre('nom');
-                $prenom = $this->requete->getParametre('prenom');
-                $dateNaissance = $this->requete->getParametre('dateNaissance');
-                $email = $this->requete->getParametre('email');
-
-                if ($mdp === $verifMdp) {
-                    $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
-
-                    $this->rediriger("admin");
+    public function inscription()
+    {
+         if ($this->requete->existeParametre("pseudo") && $this->requete->existeParametre("nom") && $this->requete->existeParametre("prenom")
+            && $this->requete->existeParametre("dateNaissance") && $this->requete->existeParametre("email") && $this->requete->existeParametre("mdp")
+            && $this->requete->existeParametre("verif_mdp")) {
+            $mdp = $this->requete->getParametre('mdp');
+            $verifMdp = $this->requete->getParametre('verif_mdp');
+            $pseudo = $this->requete->getParametre('pseudo');
+            $nom = $this->requete->getParametre('nom');
+            $prenom = $this->requete->getParametre('prenom');
+            $dateNaissance = $this->requete->getParametre('dateNaissance');
+            $email = $this->requete->getParametre('email');
+            $loginExistant = $this->utilisateur->existanceUtilisateur($pseudo, $nom, $prenom, $email);
+            if ($mdp === $verifMdp) {
+                if ($loginExistant == false ) {
+                        $this->utilisateur->inscription($pseudo, $mdp, $nom, $prenom, $dateNaissance, $email);
+                        $this->setFlash(Session::FLASH_TYPE_SUCCESS,"Inscription réalisée !");
+                        $this->rediriger("admin");
                 } else {
-                    $param['msgErreur'] = 'Mot de passe non identique';
+                    $param['msgErreur'] = $loginExistant;
+                    $this->setFlash(Session::FLASH_TYPE_WARNING,"Login existant");
                 }
+            } else {
+                $param['msgErreur'] = 'Mot de passe non identique !';
+                $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Mot de passe non identique !");
             }
+        }
         $this->genererVue();
     }
 
