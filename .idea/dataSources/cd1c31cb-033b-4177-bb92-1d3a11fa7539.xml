@@ -1138,7 +1138,12 @@
       <DefaultExpression>&apos;Autorise&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="271" parent="237" name="PRIMARY">
+    <column id="271" parent="237" name="UTIL_PHOTO">
+      <Position>10</Position>
+      <DataType>varchar(100)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="272" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UTIL_ID</ColNames>
       <Primary>1</Primary>

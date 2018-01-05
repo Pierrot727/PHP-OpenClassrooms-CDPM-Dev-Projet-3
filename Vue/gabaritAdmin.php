@@ -88,18 +88,15 @@
                     <?php } ?>
                 </ul>
             </div>
-
+            <?php if (!empty($flash)): ?>
+                <div class="alert alert-<?= $flash['type'] ?>">
+                    <p><strong><?= ucfirst($flash['type']) ?> !</strong> <?= $flash['message'] ?></p>
+                </div>
+            <?php endif; ?>
             <?= $contenu ?>
         </div>
 
         <div class="row">
-
-            <?php if ($flash = !"1"): ?>
-                <div class="alert alert-success">
-                    <p><strong>Succes !</strong> <?= $flash ?></p>
-                </div>
-            <?php endif; ?>
-
             <?php if (isset($msgErreur)): ?>
                 <div class="alert alert-danger">
                     <p><strong>Attention !</strong> <?= $msgErreur ?></p>

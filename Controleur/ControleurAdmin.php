@@ -6,6 +6,7 @@ use Blog\Framework\Session;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
 use Blog\Modele\Utilisateur;
+use Blog\Modele\Upload;
 
 
 /**
@@ -27,11 +28,22 @@ class ControleurAdmin extends ControleurSecurise
         $this->billet = new Billet();
         $this->commentaire = new Commentaire();
         $this->utilisateur = new Utilisateur();
-
+        $this->upload = new Upload();
     }
 
     public function index()
     {
+        if (!empty($_FILES)) {
+            $login = $this->requete->getSession()->getAttribut("login");
+            $info = $this->utilisateur->getUtilisateur($login);
+            $idUser = $info['idUtilisateur'];
+            $this->upload->upload($idUser);
+if (isset($message)) {
+    $this->setFlash(Session::FLASH_TYPE_WARNING, $message);
+} else {
+    $this->setFlash(Session::FLASH_TYPE_SUCCESS, "Opération effecuté !");
+}
+        }
         $nbBillets = $this->billet->getNombreBillets();
         $nbCommentaires = $this->commentaire->countCommentaires();
         $nbSignalements = $this->commentaire->getNombreSignalements();

@@ -3,6 +3,7 @@
 namespace Blog\Modele;
 
 use Blog\Framework\Modele;
+use Blog\Framework\Session;
 
 /**
  * Modélise un utilisateur du blog
@@ -47,7 +48,7 @@ class Utilisateur extends Modele
      */
     public function getUtilisateur($login)
     {
-        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade ,UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_ACCES AS acces FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
+        $sql = "SELECT UTIL_ID AS idUtilisateur, UTIL_LOGIN AS login, UTIL_MDP AS mdp, UTIL_GRADE AS grade ,UTIL_NOM AS nom, UTIL_PRENOM AS prenom, UTIL_PHOTO AS photo, UTIL_DNAISSANCE AS naissance, UTIL_EMAIL AS email, UTIL_ACCES AS acces FROM T_UTILISATEUR WHERE UTIL_LOGIN= :login";
         $utilisateur = $this->executerRequete($sql, array('login' => $login));
         if ($utilisateur->rowCount() == 1)
             return $utilisateur->fetch(); // Accès à la première ligne de résultat

@@ -34,12 +34,20 @@ $this->grade = $this->nettoyer($grade);
 
                         <div class="box-body">
                             <div class="col-sm-4">
+                                <?php if (isset($this->$utilisateur['photo'])) { ?>
                                 <div align="center"><img alt="User Pic"
                                                          src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
                                                          id="profile-image1" class="img-circle img-responsive">
-<form action="" method="post" id="profile-form-upload" class="hidden" enctype="multipart/form-data" >
-                                    <input name="file" id="profile-image-upload" type="file">                                    <!--Upload Image Js And Css-->
-</form>
+                                <?php } else { ?>
+                                    <div align="center"><img alt="User Pic"
+                                                             src="Contenu/images/uploads/<?= $this->nettoyer($utilisateur['photo']) ?>"
+                                                             id="profile-image1" class="img-circle img-responsive">
+                                <?php } ?>
+
+
+                                        <form action="" method="post" id="profile-form-upload" class="hidden" enctype="multipart/form-data" >
+                                        <input name="file" id="profile-image-upload" type="file">                                    <!--Upload Image Js And Css-->
+                                    </form>
                                     <div style="color:#999;">Cliquez içi pour changer l'image de profil</div>
 
 

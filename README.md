@@ -1,12 +1,12 @@
 # [MonBlog](https://github.com/Pierrot727/PHP-OpenClassrooms-CDPM-Dev-Projet-3.git)
 
 Auteur : Pierre-Emmanuel Laporte
-Date création : 2017
+Date création : 2018
 
 ## Version en ligne
 
 Consultable à l'adresse :
-https://www.pierre-laporte.net/git/openclassrooms/cdp-dev/projet3/
+https://www.pierre-laporte.net/git/openclassrooms/cdpm-dev/projet3/
 
 ## Description
 
