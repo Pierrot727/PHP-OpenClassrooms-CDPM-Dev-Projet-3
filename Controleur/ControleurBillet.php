@@ -17,6 +17,7 @@ class ControleurBillet extends Controleur
 
     private $billet;
     private $commentaire;
+    private $utilisateur;
 
     /**
      * Constructeur
@@ -25,6 +26,7 @@ class ControleurBillet extends Controleur
     {
         $this->billet = new Billet();
         $this->commentaire = new Commentaire();
+        $this->utilisateur = new Utilisateur();
     }
 
     // Affiche les détails sur un billet
@@ -39,9 +41,9 @@ class ControleurBillet extends Controleur
         if ($this->isAuthentificated()) {
             $login = $this->requete->getSession()->getAttribut("login");
             $acces = $this->requete->getSession()->getAttribut("acces");
-            $this->genererVue(array('login' => $login,'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires,'nbCommentaires' => $nbCommentaires ));
+            $this->genererVue(array('login' => $login,'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));
         } else {
-            $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));
+            $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires,));
         };
     }
 

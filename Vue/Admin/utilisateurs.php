@@ -56,16 +56,19 @@ $this->grade = $this->nettoyer($grade);
                                             <img src="Contenu/images/symbol/user-supr.png" alt="Supprimer utilisateur"
                                                  title="Supprimer l'utilisateur">
                                         </a>
+                                        <?php if ($this->nettoyer($utilisateur['acces'] == "Banni")) { ?>
                                         <a id="lienDebanirUtilisateur"
                                            href="admin/utilisateurDeBannir/<?= $this->nettoyer($utilisateur['id']) ?>">
                                             <img src="Contenu/images/symbol/user-unban.png" alt="Débanir l'utilisateur"
                                                  title="Débanir l'utilisateur">
                                         </a>
+                                            <?php } else { ?>
                                         <a id="lienBanirUtilisateur"
                                            href="admin/utilisateurBannir/<?= $this->nettoyer($utilisateur['id']) ?>">
                                             <img src="Contenu/images/symbol/user-ban.png" alt="Banir l'utilisateur"
                                                  title="Banir l'utilisateur">
                                         </a>
+                                            <?php } ?>
                                     <?php } ?>
                                 </th>
                                 <th><a id="lienBanirUtilisateur"

@@ -88,20 +88,17 @@
                     <?php } ?>
                 </ul>
             </div>
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php if (!empty($flash)): ?>
                 <div class="alert alert-<?= $flash['type'] ?>">
                     <p><strong><?= ucfirst($flash['type']) ?> !</strong> <?= $flash['message'] ?></p>
                 </div>
             <?php endif; ?>
-            <?= $contenu ?>
-        </div>
-
-        <div class="row">
-            <?php if (isset($msgErreur)): ?>
-                <div class="alert alert-danger">
-                    <p><strong>Attention !</strong> <?= $msgErreur ?></p>
                 </div>
-            <?php endif; ?>
+            </div>
+            <?= $contenu ?>
+
         </div>
     </div>
 </div>

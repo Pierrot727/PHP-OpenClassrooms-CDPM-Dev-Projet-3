@@ -2,11 +2,6 @@
 $this->menuActif = "Tableau de bord";
 $this->grade = $this->nettoyer($grade);
 ?>
-<pre>
-    <?php
-    var_dump($_FILES);
-    ?>
-</pre>
 
 <div class="container">
     <div class="row">
@@ -34,45 +29,48 @@ $this->grade = $this->nettoyer($grade);
 
                         <div class="box-body">
                             <div class="col-sm-4">
-                                <?php if (isset($this->$utilisateur['photo'])) { ?>
-                                <div align="center"><img alt="User Pic"
-                                                         src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
-                                                         id="profile-image1" class="img-circle img-responsive">
-                                <?php } else { ?>
+                                <?php if (isset($utilisateur['photo'])) { ?>
                                     <div align="center"><img alt="User Pic"
                                                              src="Contenu/images/uploads/<?= $this->nettoyer($utilisateur['photo']) ?>"
                                                              id="profile-image1" class="img-circle img-responsive">
+                                    </div>
+                                <?php } else { ?>
+                                        <div align="center"><img alt="User Pic"
+                                                                 src="Contenu/images/no_picture.jpg"
+                                                                 id="profile-image1" class="img-circle img-responsive">
+                                        </div>
                                 <?php } ?>
-
-
                                         <form action="" method="post" id="profile-form-upload" class="hidden" enctype="multipart/form-data" >
-                                        <input name="file" id="profile-image-upload" type="file">                                    <!--Upload Image Js And Css-->
+                                        <input name="file" id="profile-image-upload" type="file">
                                     </form>
-                                    <div style="color:#999;">Cliquez içi pour changer l'image de profil</div>
 
-
-
+                                <div style="color:#999;">Cliquez içi pour changer l'image de profil</div>
                                 </div>
-
                                 <br>
-
                                 <!-- /input-group -->
                             </div>
+
                             <div class="col-sm-6">
-                                <h4 style="color:#00b1b1;"><?= $this->nettoyer($utilisateur['prenom']) ?> <?= $this->nettoyer($utilisateur['nom']) ?></h4></span>
-                                <span><p><?= $this->nettoyer($utilisateur['grade']) ?></p></span>
+                                <h4 style="color:#00b1b1;">
+                                    <?= $this->nettoyer($utilisateur['prenom']) ?> <?= $this->nettoyer($utilisateur['nom']) ?>
+                                </h4>
+                                </span>
+                                <span>
+                                    <p><?= $this->nettoyer($utilisateur['grade']) ?></p>
+                                </span>
                                 <?php if ($this->nettoyer($utilisateur['acces'] == "Banni")) { ?>
-                                <span></br>
+                                <span>
+                                    </br>
                                     </br>
                                     <div class="alert alert-danger">
                                         <strong>Attention !</strong> Vous êtes banni, contactez un administrateur !
                                     </div>
-                                    </p></span>
+                                    </p>
+                                </span>
                                 <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                             <hr style="margin:5px 0 5px 0;">
-
 
                             <div class="col-sm-5 col-xs-6 tital ">Nom:</div>
                             <div class="col-sm-7 col-xs-6 "><?= $this->nettoyer($utilisateur['nom']) ?></div>

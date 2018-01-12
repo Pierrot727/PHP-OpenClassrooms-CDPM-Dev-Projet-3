@@ -7,29 +7,34 @@ use Blog\Framework\Session;
 use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
 use Blog\Modele\Utilisateur;
+use Blog\Modele\Histoire;
 
 class ControleurAccueil extends Controleur
 {
 
     private $billet;
+    private $histoire;
 
     public function __construct()
     {
         $this->billet = new Billet();
         $this->commentaire = new Commentaire();
         $this->utilisateur = new Utilisateur();
+        $this->histoire = new Histoire();
     }
 
     // Affiche la liste de tous les billets du blog
     public function index()
     {
         $page = 1;
+        $histoire = $this->histoire->auteur();
         $billets = $this->billet->getBilletsTronquesVisible($page, 200);
         $nbPages = $this->billet->getNombrePages();
         if (isset($_COOKIE['no_splash'])) {
             $this->genererVue(array('billets' => $billets,
                 'page' => $page,
-                'nbPages' => $nbPages
+                'nbPages' => $nbPages,
+                'histoire' => $histoire,
             ));
         } else {
             $this->rediriger('accueil', 'splash');

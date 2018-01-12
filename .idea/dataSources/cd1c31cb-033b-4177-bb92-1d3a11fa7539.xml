@@ -932,102 +932,99 @@
     <table id="235" parent="4" name="t_histoire">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="236" parent="4" name="t_livre">
+    <table id="236" parent="4" name="t_utilisateur">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="237" parent="4" name="t_utilisateur">
-      <Engine>MyISAM</Engine>
-    </table>
-    <column id="238" parent="233" name="BIL_ID">
+    <column id="237" parent="233" name="BIL_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="233" name="BIL_DATE">
+    <column id="238" parent="233" name="BIL_DATE">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="233" name="BIL_TITRE">
+    <column id="239" parent="233" name="BIL_TITRE">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="233" name="BIL_CONTENU">
+    <column id="240" parent="233" name="BIL_CONTENU">
       <Position>4</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="233" name="BIL_VISIBLE">
+    <column id="241" parent="233" name="BIL_VISIBLE">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;NON&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="243" parent="233" name="BIL_PHOTO">
+    <column id="242" parent="233" name="BIL_PHOTO">
       <Position>6</Position>
       <DataType>varchar(100)|0</DataType>
       <DefaultExpression>&apos;defaut&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="244" parent="233" name="PRIMARY">
+    <key id="243" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>BIL_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="245" parent="234" name="COM_ID">
+    <column id="244" parent="234" name="COM_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="234" name="COM_DATE">
+    <column id="245" parent="234" name="COM_DATE">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="234" name="COM_AUTEUR">
+    <column id="246" parent="234" name="COM_AUTEUR">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="234" name="COM_CONTENU">
+    <column id="247" parent="234" name="COM_CONTENU">
       <Position>4</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="234" name="BIL_ID">
+    <column id="248" parent="234" name="BIL_ID">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="234" name="COM_SIGNALEMENT">
+    <column id="249" parent="234" name="COM_SIGNALEMENT">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="251" parent="234" name="fk_com_bil">
+    <index id="250" parent="234" name="fk_com_bil">
       <ColNames>BIL_ID</ColNames>
     </index>
-    <key id="252" parent="234" name="PRIMARY">
+    <key id="251" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>COM_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="253" parent="234" name="fk_com_bil">
+    <foreign-key id="252" parent="234" name="fk_com_bil">
       <ColNames>BIL_ID</ColNames>
       <RefSchemaName>monblog</RefSchemaName>
       <RefTableName>t_billet</RefTableName>
@@ -1035,115 +1032,102 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="254" parent="235" name="histoire_photo">
+    <column id="253" parent="235" name="histoire_id">
       <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="254" parent="235" name="histoire_photo">
+      <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;photoAuteur.JPG&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="255" parent="235" name="histoire_texte">
-      <Position>2</Position>
+      <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="256" parent="235" name="histoire_citation">
-      <Position>3</Position>
-      <DataType>varchar(100)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="257" parent="236" name="livre_id">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="258" parent="236" name="livre_titre">
-      <Position>2</Position>
-      <DataType>varchar(100)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="259" parent="236" name="livre_resume">
-      <Position>3</Position>
-      <DataType>varchar(100)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="260" parent="236" name="livre_photo">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;livre-defaut.jpg&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="261" parent="236" name="PRIMARY">
+    <column id="257" parent="235" name="histoire_titre">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="258" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>livre_id</ColNames>
+      <ColNames>histoire_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="262" parent="237" name="UTIL_ID">
+    <column id="259" parent="236" name="UTIL_ID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="237" name="UTIL_LOGIN">
+    <column id="260" parent="236" name="UTIL_LOGIN">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="237" name="UTIL_MDP">
+    <column id="261" parent="236" name="UTIL_MDP">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="265" parent="237" name="UTIL_NOM">
+    <column id="262" parent="236" name="UTIL_NOM">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="237" name="UTIL_PRENOM">
+    <column id="263" parent="236" name="UTIL_PRENOM">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="237" name="UTIL_DNAISSANCE">
+    <column id="264" parent="236" name="UTIL_DNAISSANCE">
       <Position>6</Position>
       <DataType>date|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="237" name="UTIL_EMAIL">
+    <column id="265" parent="236" name="UTIL_EMAIL">
       <Position>7</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="237" name="UTIL_GRADE">
+    <column id="266" parent="236" name="UTIL_GRADE">
       <Position>8</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;Utilisateur&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="237" name="UTIL_ACCES">
+    <column id="267" parent="236" name="UTIL_ACCES">
       <Position>9</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;Autorise&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="237" name="UTIL_PHOTO">
+    <column id="268" parent="236" name="UTIL_PHOTO">
       <Position>10</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="272" parent="237" name="PRIMARY">
+    <key id="269" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>UTIL_ID</ColNames>
       <Primary>1</Primary>

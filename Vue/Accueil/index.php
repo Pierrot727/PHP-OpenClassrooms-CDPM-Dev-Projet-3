@@ -1,3 +1,7 @@
+<?php
+$this->histoire = $histoire;
+?>
+
 <div class="row pagination">
     <ul>
         <?php for ($i = 1; $i <= $nbPages; $i++): ?>

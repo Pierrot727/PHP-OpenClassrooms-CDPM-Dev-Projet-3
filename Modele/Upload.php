@@ -18,6 +18,11 @@ class Upload extends Modele
      *
      * @author Pierre-emmanuel Laporte
      *
+     *
+     * @param $id
+     * @param string $param
+     *
+     * @return string
      */
     public function upload($id,$param = "photo")
     {

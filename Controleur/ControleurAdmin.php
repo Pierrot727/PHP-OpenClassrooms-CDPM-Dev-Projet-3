@@ -7,6 +7,7 @@ use Blog\Modele\Billet;
 use Blog\Modele\Commentaire;
 use Blog\Modele\Utilisateur;
 use Blog\Modele\Upload;
+use Blog\Modele\Histoire;
 
 
 /**
@@ -19,6 +20,7 @@ class ControleurAdmin extends ControleurSecurise
     private $billet;
     private $commentaire;
     private $utilisateur;
+    private $histoire;
 
     /**
      * Constructeur
@@ -29,6 +31,7 @@ class ControleurAdmin extends ControleurSecurise
         $this->commentaire = new Commentaire();
         $this->utilisateur = new Utilisateur();
         $this->upload = new Upload();
+        $this->histoire = new Histoire();
     }
 
     public function index()
@@ -159,14 +162,16 @@ if (isset($message)) {
         if ($this->requete->existeParametre("dateBillet") && $this->requete->existeParametre("titreBillet") && $this->requete->existeParametre("contenuBillet")) {
             $dateBillet = $this->requete->getParametre('dateBillet');
             $titreBillet = $this->requete->getParametre('titreBillet');
+
             if($this->requete->existeParametre('photoBillet')){
                 $photoBillet = $this->requete->getParametre('photoBillet');
             }else{
                 $photoBillet = "defaut";
             }
+
             $contenuBillet = $this->requete->getParametre('contenuBillet');
             $this->billet->BilletCreer($dateBillet, $titreBillet, $photoBillet, $contenuBillet);
-            $this->rediriger("admin");
+            $this->rediriger("admin", "administration");
         }
         $billet = array('title' => "Mon titre", 'description' => '<p>Le contenu de mon article</p>');
         $grade = $this->requete->getSession()->getAttribut("grade");
@@ -318,5 +323,21 @@ if (isset($message)) {
         $commmentaire = $this->commentaire->getCommentaire($id);
         $this->genererVueAdmin(array('commentaire' => $commmentaire, 'grade' => $grade));
 
+    }
+
+    public function  histoireEditer ()
+    {
+        $this->needAdminRole();
+        $grade = $this->requete->getSession()->getAttribut("grade");
+        $auteur = $this->histoire->auteur();
+        if ($this->requete->existeParametre("histoirePhoto")) {
+            $photo = $this->requete->getParametre('histoirePhoto');
+            $titre = $this->requete->getParametre('histoireTitre');
+            $texte = $this->requete->getParametre('histoireTexte');
+            $citation = $this->requete->getParametre('histoireCitation');
+            $auteur = $this->histoire->editerAuteur($photo,$titre, $texte, $citation);
+            $this->rediriger("admin", "administration");
+        }
+        $this->genererVue(array('auteur' => $auteur, 'grade' => $grade));
     }
 }

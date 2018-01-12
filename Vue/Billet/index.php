@@ -25,7 +25,8 @@
                             <input type="hidden" name="id_episode" value="">
                             <span class="pseudo">
                             <i class="fa fa-pencil"
-                               aria-hidden="true"></i> <?= $this->nettoyer($commentaire['auteur']) ?>
+                               aria-hidden="true"></i>
+                                <?= $this->nettoyer($commentaire['auteur']) ?>
                         </span>
                             <span class="comment-date">
                             <?= $this->nettoyer($commentaire['date']) ?>

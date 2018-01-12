@@ -14,7 +14,8 @@
     <script src="Contenu/js/bootstrap.min.js"></script>
     <script src='Contenu/js/tinymce/tinymce.min.js'></script>
 
-    <link rel='stylesheet' id='Roboto-css' href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700'>
+    <link rel='stylesheet' id='Roboto-css'
+          href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700'>
     <link rel='stylesheet' id='Patua+One-css' href='http://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700'>
     <link rel='stylesheet' id='Roboto+Slab-css' href='http://fonts.googleapis.com/css?family=Roboto+Slab:1,300,400,400italic,700,700italic'>
     <link rel='stylesheet' id='Caudex-css' href='http://fonts.googleapis.com/css?family=Caudex:100,300,400,400italic,700,700italic'>
@@ -31,8 +32,7 @@
         <ul class="menu">
             <li><img src="Contenu/images/logo.png"></li>
             <li class="selected"><a href="">Accueil</a></li>
-            <li><a href="">Mon histoire</a></li>
-            <li><a href="">Mes livres</a></li>
+            <li><a href="histoire">Mon histoire</a></li>
             <li><a href="contact">Contact</a></li>
         </ul>
     </nav>
@@ -42,11 +42,11 @@
 </header>
 
 <div class="container">
-    <?php if (!empty($flash)): ?>
-        <div class="alert alert-<?= $flash['type'] ?>">
-            <p><strong><?= ucfirst($flash['type']) ?> !</strong> <?= $flash['message'] ?></p>
-        </div>
-    <?php endif; ?>
+            <?php if (!empty($flash)): ?>
+                <div class="alert alert-<?= $flash['type'] ?>">
+                    <p><strong><?= ucfirst($flash['type']) ?> !</strong> <?= $flash['message'] ?></p>
+                </div>
+            <?php endif; ?>
     <?= $contenu ?>
 </div>
 
@@ -57,7 +57,8 @@
 
             <div>
                 <h3>Site conçu grace à</h3>
-                <p> Un framework MVC par <a target="_blank" href="https://github.com/bpesquet/MonBlog">Baptiste Pesquet</a><br>
+                <p> Un framework MVC par <a target="_blank" href="https://github.com/bpesquet/MonBlog">Baptiste
+                        Pesquet</a><br>
                     Booststrap <a target="_blank" href="https://getbootstrap.com/">Framework CSS</a><br>
                     Tiny Mce. <a target="_blank" href="http://tinymce.com">WYSIWYG editor</a><br>
                     Design original de Daniel JEREMIE<br>
@@ -71,8 +72,8 @@
             </div>
             <div>
                 <h3>Écrivez-moi</h3>
-                <p>Jean FORTEROCHE<br><span>
-                          Maison des auteurs<br>
+                <p> Jean Forteroche<br><span>
+                        Maison des auteurs<br>
                           3, impasse de l'ange bleu<br>
                           40100 Gignac<br>
                           Tel. 05 55 24 45 90 <br>

@@ -12,7 +12,7 @@
             Vous allez donc devoir développer un moteur de blog en PHP et MySQL.<br>
             <br>
             <div class="bas">
-                Ce site démo a été dévellopé avec Bootstrap 3.3.7<br>
+                Ce site démo a été développé avec Bootstrap 3.3.7<br>
 
                 <br>
                 Il est disponible en OpenSource sur <a href="https://github.com/Pierrot727/PHP-OpenClassrooms-CDPM-Dev-Projet-3">dépot GIT <img src="Contenu/images/symbol/gitlogo.png" alt="Logo Git"></a><br>

@@ -33,7 +33,7 @@ abstract class ControleurSecurise extends Controleur
             $this->requete->getSession()->getAttribut('grade') === 'Administrateur') {
         } else {
             header('HTTP/1.0 403 Forbidden');
-            $this->rediriger("accueil/forbidden");
+            $this->rediriger("accueil","forbidden");
         }
     }
 

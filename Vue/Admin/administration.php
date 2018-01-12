@@ -20,6 +20,10 @@ $this->grade = $this->nettoyer($grade);
                 nouveau billet
             </a>
 
+            <a id="lienCrBillet" href="admin/histoireEditer">
+                <img src="Contenu/images/symbol/profil.png" alt="Editer mon profil" title="Editer mon profil"> Editer le profil "Mon histoire"
+            </a>
+
             <form action="admin/general" method="post">
                 <h2 class="sub-header">Ensemble des billets</h2>
                 <div class="table-responsive">
