@@ -41,7 +41,7 @@ class ControleurBillet extends Controleur
         if ($this->isAuthentificated()) {
             $login = $this->requete->getSession()->getAttribut("login");
             $acces = $this->requete->getSession()->getAttribut("acces");
-            $this->genererVue(array('login' => $login,'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires ));
+            $this->genererVue(array('login' => $login, 'acces' => $acces, 'billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires));
         } else {
             $this->genererVue(array('billet' => $billet, 'billets' => $billets, 'commentaires' => $commentaires, 'nbCommentaires' => $nbCommentaires,));
         };
@@ -51,13 +51,18 @@ class ControleurBillet extends Controleur
     public function commenter()
     {
         $idBillet = $this->requete->getParametre("id");
-        if($this->isAuthentificated()){
-        $auteur = $this->requete->getSession()->getAttribut("login");
-        $contenu = $this->requete->getParametre("contenu");
-        $this->commentaire->ajouterCommentaire($auteur, $contenu, $idBillet);
-    }
-        // Exécution de l'action par défaut pour réafficher la liste des billets
-        $this->executerAction("index");
+        if ($this->isAuthentificated()) {
+            $auteur = $this->requete->getSession()->getAttribut("login");
+            $contenu = $this->requete->getParametre("contenu");
+            if (strlen($contenu) > 5) {
+                $this->commentaire->ajouterCommentaire($auteur, $contenu, $idBillet);
+
+            // Exécution de l'action par défaut pour réafficher la liste des billets
+            $this->executerAction("index");
+        } else {
+               $this->rediriger("accueil");
+            }
+        }
     }
 }
 
